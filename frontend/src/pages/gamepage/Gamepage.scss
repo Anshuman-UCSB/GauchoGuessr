@@ -1,0 +1,47 @@
+.gamepage-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        180deg,
+        #00467d 0%,
+        #002846 25%,
+        #001c31 54%,
+        #002e51 100%
+    );
+    .logo {
+        position: absolute;
+        img {
+            width: 300px;
+        }
+        .logo-text {
+            position: absolute;
+            top: 15px;
+            left: 50px;
+            width: 200px;
+        }
+    }
+    .menu-button {
+        position: absolute;
+        right: 0;
+        img {
+            width: 300px;
+        }
+        .icon {
+            position: absolute;
+            right: 80px;
+            top: 17px;
+        }
+    }
+    .game {
+        .timer {
+            .time {
+                h2 {
+                }
+            }
+            .score {
+                h3 {
+                }
+            }
+        }
+    }
+}
