@@ -84,6 +84,7 @@ export default function Homepage() {
                             webkitTextStroke="10px black"
                         />
                     </div>
+                    <Link to="/game">
                     <button>
                         <StrokeText
                             text="START!"
@@ -100,6 +101,7 @@ export default function Homepage() {
                             webkitTextStroke="5px black"
                         />
                     </button>
+                    </Link>
                     <p>
                         How well do you know UCSB’s campus? Guess your location
                         to earn points, and see if you can top the leaderboard!
