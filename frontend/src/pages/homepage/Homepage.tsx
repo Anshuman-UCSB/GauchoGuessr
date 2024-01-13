@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Leaderboard from "../../components/leaderboard/Leaderboard";
 import StrokeText from "../../components/stroketext/StrokeText";
 import "./Homepage.scss";
@@ -41,33 +41,58 @@ const usersScores: UserScore[] = [
 ];
 
 export default function Homepage() {
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // Clean up the event listener when the component unmounts
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Function to determine font size based on screen width
+    const getFontSize = (baseSize: any) => {
+        if (screenWidth <= 700) {
+            return baseSize * 0.6; // Half size on small screens
+        } else if (screenWidth <= 1300) {
+            return baseSize * 0.75; // 75% size on medium screens
+        }
+        return baseSize; // Full size on large screens
+    };
+
     return (
         <div className="homepage">
             <div className="wrapper">
                 <div className="start">
-                    <StrokeText
-                        text="GAUCHO GUESSR"
-                        fontFamily="'Inter', sans-serif"
-                        color="#fff"
-                        fontSize="120px"
-                        fontStyle="italic"
-                        fontWeight="900"
-                        lineHeight="110px"
-                        textAlign="center"
-                        shadowColor="#000"
-                        xOffset="-4px"
-                        yOffset="4px"
-                        webkitTextStroke="10px black"
-                    />
+                    <div className="title-text">
+                        <StrokeText
+                            text="GAUCHO GUESSR"
+                            fontFamily="'Inter', sans-serif"
+                            color="#fff"
+                            fontSize={`${getFontSize(120)}px`}
+                            fontStyle="italic"
+                            fontWeight="900"
+                            lineHeight={`${getFontSize(110)}px`}
+                            textAlign="center"
+                            shadowColor="#000"
+                            xOffset="-4px"
+                            yOffset="4px"
+                            webkitTextStroke="10px black"
+                        />
+                    </div>
                     <button>
                         <StrokeText
                             text="START!"
                             fontFamily="'Inter', sans-serif"
                             color="#fff"
-                            fontSize="80px"
+                            fontSize={`${getFontSize(80)}px`}
                             fontStyle="italic"
                             fontWeight="900"
-                            lineHeight="normal"
+                            lineHeight={`${getFontSize(70)}px`}
                             textAlign="center"
                             shadowColor="#000"
                             xOffset="-4px"
