@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { GOOGLE_MAPS_API_KEY } from '../config';
 
@@ -62,3 +62,5 @@ function MyMap() {
 }
 
 export default React.memo(MyMap)
+*/
+export default <div></div>
