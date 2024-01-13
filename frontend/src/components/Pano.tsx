@@ -8,10 +8,9 @@ interface PanoramicProps {
 };
 
 function Panoramic(PanoramicProps: PanoramicProps) {
-    const link = "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=" + PanoramicProps.src + "&title=" + PanoramicProps.title;
+    const link = "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=" + PanoramicProps.src + "&title=" + PanoramicProps.title +"&autoLoad=true";
     return(
-        //There is an autoLoad that I need to figure out how to use to load the image immediately
-        <iframe width={PanoramicProps.width} height={PanoramicProps.height} allowFullScreen  src={link}></iframe>
+        <iframe width={PanoramicProps.width} height={PanoramicProps.height} allowFullScreen  src={link} title={PanoramicProps.title}></iframe>
     );
 }
 
