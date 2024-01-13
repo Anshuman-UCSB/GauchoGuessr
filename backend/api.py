@@ -22,7 +22,7 @@ class Api:
 		print("loaded leaderboards")
 
 		self.images = {}
-		for cat in ('street',):
+		for cat in ('street',"store"):
 			self.images[cat]=[v.to_dict() for v in self.db.collection("images").document("categories").collection(cat).stream()]
 		print("loaded images")
 
@@ -69,6 +69,13 @@ class Api:
 			return "error: invalid leaderboard"
 
 	def storeImage(self, imgur, lat, lon, category):
+		latlons = []
+		for c,t in self.images.items():
+			latlons.extend([(v['lat'],v['lon']) for v in t])
+		print(len(latlons))
+		if (lat,lon) in latlons:
+			print("already exists")
+			return
 		cat_col = self.db.collection("images").document("categories").collection(category)
 		cat_col.add({"img":imgur, "lat":lat, "lon":lon})
 
@@ -95,5 +102,7 @@ if __name__=="__main__":
 	a = Api()
 	# a.storeImage("https://imgur.com/IzcTUg8", 34.4097920, -119.8540924, "street")
 	# a.storeImage("https://imgur.com/VDQIARh",34.4101267, -119.8544833, "street")
+	# a.storeImage("https://imgur.com/xdPyAmu",34.4122311, -119.8574505, "store")
+	# a.storeImage("https://imgur.com/UDY4o3P",34.4107781, -119.8569044,  "street")
 	# a.incrementUsers()
 	print(a.getImages(2))
