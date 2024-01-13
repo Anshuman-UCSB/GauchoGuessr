@@ -2,6 +2,7 @@ import React from "react";
 import Progress from "../../components/progress/Progress";
 import Right from "./Right.svg";
 import Left from "./Left.svg";
+import Timer from "./Timer.svg";
 import StrokeText from "../../components/stroketext/StrokeText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
