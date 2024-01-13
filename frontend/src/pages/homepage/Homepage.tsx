@@ -3,6 +3,42 @@ import Leaderboard from "../../components/leaderboard/Leaderboard";
 import StrokeText from "../../components/stroketext/StrokeText";
 import "./Homepage.scss";
 
+type UserScore = {
+    username: string;
+    score: number;
+};
+
+const usersScores: UserScore[] = [
+    { username: "User123", score: 45678 },
+    { username: "JohnDoe456", score: 37890 },
+    { username: "TechGeek007", score: 62543 },
+    { username: "CodingMaster99", score: 54321 },
+    { username: "GamerGirl23", score: 48765 },
+    { username: "WebDevPro555", score: 57890 },
+    { username: "DesignWizard123", score: 60123 },
+    { username: "HackerElite789", score: 52345 },
+    { username: "CodeNinja456", score: 49876 },
+    { username: "DigitalArtist22", score: 42109 },
+    { username: "CyberSecExpert777", score: 55432 },
+    { username: "AIEnthusiast555", score: 51234 },
+    { username: "TechSavvyGirl69", score: 53987 },
+    { username: "WebDesignPro222", score: 59876 },
+    { username: "User123", score: 45678 },
+    { username: "JohnDoe456", score: 37890 },
+    { username: "TechGeek007", score: 62543 },
+    { username: "CodingMaster99", score: 54321 },
+    { username: "GamerGirl23", score: 48765 },
+    { username: "WebDevPro555", score: 57890 },
+    { username: "DesignWizard123", score: 60123 },
+    { username: "HackerElite789", score: 52345 },
+    { username: "CodeNinja456", score: 49876 },
+    { username: "DigitalArtist22", score: 42109 },
+    { username: "CyberSecExpert777", score: 55432 },
+    { username: "AIEnthusiast555", score: 51234 },
+    { username: "TechSavvyGirl69", score: 53987 },
+    { username: "WebDesignPro222", score: 59876 },
+];
+
 export default function Homepage() {
     return (
         <div className="homepage">
@@ -43,7 +79,7 @@ export default function Homepage() {
                 </p>
             </div>
             <div className="leaderboard">
-                <Leaderboard></Leaderboard>
+                <Leaderboard usersScores={usersScores}></Leaderboard>
             </div>
         </div>
     );
