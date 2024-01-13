@@ -1,0 +1,18 @@
+.panoramic-view {
+  width: 100%;
+  height: 500px; /* Adjust the height as needed */
+  background-image: url('demoPano.jpg');
+  background-size: 200% 100%; /* Allow the image to be twice as wide as the container */
+  background-position: 50% 50%; /* Center the initial view */
+  cursor: grab;
+  overflow: hidden;
+  transition: background-position-x 0.3s ease; /* Add smooth transition */
+}
+
+.panoramic-view:active {
+  cursor: grabbing;
+}
+
+.panoramic-view:hover {
+  background-position-x: calc(50% + 10px); /* Add a small offset to create a hover effect */
+}

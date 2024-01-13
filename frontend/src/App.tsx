@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import PanoramicView from './PanoramicView';
+/*
 function App() {
   return (
     <div className="App">
@@ -22,5 +23,14 @@ function App() {
     </div>
   );
 }
-
+*/
+const App = () => {
+  return (
+    <div className="app">
+      {/* Other components or content */}
+      <PanoramicView />
+      {/* More components or content */}
+    </div>
+  );
+};
 export default App;
