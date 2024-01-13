@@ -1,0 +1,41 @@
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    width: 500px;
+    border-radius: 20px;
+    border: 5px solid #000;
+    box-shadow: -4px 4px 0px 0px #000;
+    padding-top: 20px;
+    min-height: 120%;
+    width: 1000px;
+    overflow-y: scroll;
+    padding-bottom: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+    box-sizing: border-box;
+    .leaderboard-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .user-score {
+            span {
+                color: #000;
+                font-family: Inter;
+                font-size: 28px;
+                font-style: italic;
+                font-weight: 900;
+                line-height: 50px; /* 178.571% */
+            }
+        }
+    }
+}
+.leaderboard::-webkit-scrollbar {
+    display: none;
+}
+
+.leaderboard {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
