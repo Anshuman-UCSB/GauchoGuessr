@@ -1,0 +1,30 @@
+.homepage {
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(180deg, #febc11 0%, #febc11 53.5%, #ffdf8c 100%),
+        #fff;
+    width: 100vw;
+    .start {
+        width: 50%;
+        h1 {
+            -webkit-text-stroke-width: 8px;
+            -webkit-text-stroke-color: black;
+            font-size: 150px;
+            font-style: italic;
+            font-weight: 900;
+            color: #fff;
+            line-height: 140px;
+            text-align: center;
+        }
+        button {
+            border-radius: 50px;
+            border: 5px solid #000;
+            background: linear-gradient(180deg, #ff7474 0%, #ff3a3a 100%),
+                linear-gradient(180deg, #ffb800 0%, #ffdf8c 100%);
+            box-shadow: -4px 4px 0px 0px #000;
+        }
+    }
+    .leaderboard {
+        width: 50%;
+    }
+}
