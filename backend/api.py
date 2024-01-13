@@ -61,6 +61,11 @@ class Api:
 			return "success"
 		else:
 			return "error: invalid leaderboard"
+
+	def storeImage(self, imgur, lat, lon, category):
+		cat_col = self.db.collection("images").document("categories").collection(category)
+		cat_col.add({"img":imgur, "lat":lat, "lon":lon})
 if __name__=="__main__":
 	a = Api()
 	print(a.getLeaderboard("default"))
+	a.storeImage("https://imgur.com/IzcTUg8", 34.4097920, -119.8540924, "street")
