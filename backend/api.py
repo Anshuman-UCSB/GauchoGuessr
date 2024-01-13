@@ -40,7 +40,6 @@ class Api:
 		query = (
 			lb_col
 			.order_by('score', direction=firestore.Query.DESCENDING)
-			.limit(10)
 		)
 
 		def on_snapshot(col_snapshot, changes, read_time):
