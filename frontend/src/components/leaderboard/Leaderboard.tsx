@@ -25,7 +25,7 @@ export default function Leaderboard({ usersScores }: LeaderboardProps) {
                 text="LEADERBOARD"
                 fontFamily="'Inter', sans-serif"
                 color="#fff"
-                fontSize="40px"
+                fontSize="37px"
                 fontStyle="italic"
                 fontWeight="900"
                 lineHeight="50px"

@@ -9,24 +9,24 @@
     box-shadow: -4px 4px 0px 0px #000;
     padding-top: 20px;
     min-height: 120%;
-    width: 1000px;
+    min-width: 600px;
     overflow-y: scroll;
-    padding-bottom: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-bottom: 300px;
     box-sizing: border-box;
+    margin: 10vh 20px;
     .leaderboard-container {
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 20px;
         .user-score {
             span {
                 color: #000;
                 font-family: Inter;
-                font-size: 28px;
+                font-size: 24px;
                 font-style: italic;
                 font-weight: 900;
-                line-height: 50px; /* 178.571% */
+                line-height: 30px; /* 178.571% */
             }
         }
     }
