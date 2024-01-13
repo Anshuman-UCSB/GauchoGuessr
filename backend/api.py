@@ -1,4 +1,5 @@
 import firebase_admin
+from random import sample
 from firebase_admin import firestore
 import threading
 from google.cloud.firestore_v1.base_query import FieldFilter
@@ -11,14 +12,19 @@ class Api:
 			firebase_admin.get_app()
 		except ValueError:
 			firebase_admin.initialize_app()
+		print("logged in fine")
 		self.db = firestore.client()
 		self.data = {}
 		# self.leaderboards = list(self.db.collection("leaderboards").stream())
 		self.leaderboards = ["default","blitz"]
 		for l in self.leaderboards:
 			self.registerLeaderboard(l)
-		print("leaderboards:",self.leaderboards)
-		print("logged in fine")
+		print("loaded leaderboards")
+
+		self.images = {}
+		for cat in ('street',"store"):
+			self.images[cat]=[v.to_dict() for v in self.db.collection("images").document("categories").collection(cat).stream()]
+		print("loaded images")
 
 	def registerLeaderboard(self, name):
 		if name not in self.leaderboards:
@@ -61,6 +67,42 @@ class Api:
 			return "success"
 		else:
 			return "error: invalid leaderboard"
+
+	def storeImage(self, imgur, lat, lon, category):
+		latlons = []
+		for c,t in self.images.items():
+			latlons.extend([(v['lat'],v['lon']) for v in t])
+		print(len(latlons))
+		if (lat,lon) in latlons:
+			print("already exists")
+			return
+		cat_col = self.db.collection("images").document("categories").collection(category)
+		cat_col.add({"img":imgur, "lat":lat, "lon":lon})
+
+	def incrementUsers(self):
+		stats = self.db.collection("stats").document("users")
+		n = stats.get().to_dict()['number']
+		stats.set({"number":n+1})
+	
+	def getUsers(self):
+		stats = self.db.collection("stats").document("users")
+		n = stats.get().to_dict()['number']
+		return n
+	
+	def getImages(self, n, categories=None):
+		categories = categories or self.images.keys()
+		images = []
+		for cat in categories:
+			images.extend(self.images[cat])
+		return sample(images, n)
+		
+
+
 if __name__=="__main__":
 	a = Api()
-	print(a.getLeaderboard("default"))
+	# a.storeImage("https://imgur.com/IzcTUg8", 34.4097920, -119.8540924, "street")
+	# a.storeImage("https://imgur.com/VDQIARh",34.4101267, -119.8544833, "street")
+	# a.storeImage("https://imgur.com/xdPyAmu",34.4122311, -119.8574505, "store")
+	# a.storeImage("https://imgur.com/UDY4o3P",34.4107781, -119.8569044,  "street")
+	# a.incrementUsers()
+	print(a.getImages(2))

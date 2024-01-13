@@ -1,38 +1,53 @@
 import React from "react";
+import StrokeText from "../stroketext/StrokeText";
+import "./Leaderboard.scss";
 
+interface UserScore {
+    username: string;
+    score: number;
+}
 
-const users = [
-    { username: 'User1', score: 120 },
-    { username: 'User2', score: 90 },
-    { username: 'User3', score: 80 },
-    { username: 'User4', score: 70 },
-    { username: 'User5', score: 60 },
-    { username: 'User6', score: 50 },
-    { username: 'User7', score: 40 },
-    { username: 'User8', score: 300 },
-    { username: 'User9', score: 20 },
-    { username: 'User10', score: 10 },
-  ];
-//Eventually pass in all users and scores as props
-export default function Leaderboard() {
-    // Sort the data based on scores in descending order
+interface LeaderboardProps {
+    usersScores: UserScore[];
+}
 
-    const sortedData = users.sort((a, b) => b.score - a.score);
-    
-    // Take the top 5 entries
-    const top5 = sortedData.slice(0, 5);
-    
+export default function Leaderboard({ usersScores }: LeaderboardProps) {
+    // Function to calculate the number of dots needed based on text length
+    const calculateDots = (username: string, score: number) => {
+        const maxLength = 40; // Adjust this based on your layout width
+        const currentLength = username.length + score.toString().length;
+        return ".".repeat(maxLength - currentLength);
+    };
+
     return (
-      <div>
-        <h2>Leaderboard</h2>
-        <ol>
-          {top5.map((user, index) => (
-            <li key={user.username}>
-               {user.username} - {user.score} points
-            </li>
-          ))}
-        </ol>
-      </div>
+        <div className="leaderboard-container">
+            <StrokeText
+                text="LEADERBOARD"
+                fontFamily="'Inter', sans-serif"
+                color="#fff"
+                fontSize="37px"
+                fontStyle="italic"
+                fontWeight="900"
+                lineHeight="50px"
+                textAlign="center"
+                shadowColor="#000"
+                xOffset="-2px"
+                yOffset="2px"
+                webkitTextStroke="5px black"
+            />
+            <div className="user-list">
+                {usersScores.map((userScore, index) => (
+                    <div key={index} className="user-score">
+                        <span className="username">{userScore.username}</span>
+                        <span className="dots">
+                            {calculateDots(userScore.username, userScore.score)}
+                        </span>
+                        <span className="score">
+                            {userScore.score.toLocaleString()}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
-
 }
