@@ -13,15 +13,20 @@ class Api:
 			firebase_admin.initialize_app()
 		self.db = firestore.client()
 		self.data = {}
+		# self.leaderboards = list(self.db.collection("leaderboards").stream())
+		self.leaderboards = ["default","blitz"]
+		for l in self.leaderboards:
+			self.registerLeaderboard(l)
+		print("leaderboards:",self.leaderboards)
 		print("logged in fine")
 
 	def registerLeaderboard(self, name):
-		if name not in ("default",):
+		if name not in self.leaderboards:
 			print("Invalid leaderboard",name)
 			return False
 		if name in self.data:
 			print("Already registered",name)
-			return False
+			return True
 		doc_ref = self.db.collection("leaderboards").document(name)
 		lb_col = doc_ref.collection("leaderboard")
 
@@ -50,8 +55,12 @@ class Api:
 		return self.data[name]
 	
 	def setScore(self, leaderboard, name, score):
-		lb_col = self.db.collection("leaderboards").document(name).collection("leaderboard")
-		lb_col.add({"name":name, "score":score, "time":firestore.SERVER_TIMESTAMP})
+		if leaderboard in self.data or self.registerLeaderboard(name):
+			lb_col = self.db.collection("leaderboards").document(leaderboard).collection("leaderboard")
+			lb_col.add({"name":name, "score":score, "time":firestore.SERVER_TIMESTAMP})
+			return "success"
+		else:
+			return "error: invalid leaderboard"
 if __name__=="__main__":
 	a = Api()
 	print(a.getLeaderboard("default"))

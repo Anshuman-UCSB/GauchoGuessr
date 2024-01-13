@@ -35,8 +35,7 @@ def getLeaderboard(leaderboard_name: str):
     # return {i:v for i,v in enumerate(api.getLeaderboard(leaderboard_name))}
 @app.post("/leaderboard/{leaderboard_name}", status_code=200, response_class=PrettyJSONResponse)
 def setScore(leaderboard_name: str, name:str, score:int):
-    api.setScore(leaderboard_name, name, score)
-    return {i:v for i,v in enumerate(api.getLeaderboard(leaderboard_name))}
+    return api.setScore(leaderboard_name, name, score)
 
 if __name__ == "__main__":
     import uvicorn
