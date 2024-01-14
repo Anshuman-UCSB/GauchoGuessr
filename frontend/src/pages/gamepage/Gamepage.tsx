@@ -31,6 +31,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [curLat, setCurLat] = useState(0);
     const [curLng, setCurLng] = useState(0);
     const [gameCount, setGameCount] = useState(0);
+    const [time, setTime] = useState(0);
 
     const [gameId, setGameId] = useState(null);
     const [img, setImg] = useState("");
@@ -42,6 +43,9 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     };
     const handleLng = (lng: number) => {
         setCurLng(lng);
+    };
+    const handleTime = (time: number) => {
+        setTime(time);
     };
     const progressGame = () => {
         if (gameCount >= 9) {
@@ -160,7 +164,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <CountdownTimer/>
+                        <CountdownTimer handleTime={handleTime}/>
                     </div>
                     <div className="score">
                         <h3>31,415</h3>
