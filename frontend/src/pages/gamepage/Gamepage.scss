@@ -112,6 +112,10 @@
                 border: 5px solid #000;
                 overflow: hidden;
             }
+            .large {
+                width: 80vw !important;
+                height: 80vw !important;
+            }
         }
     }
     .progress-bar {
@@ -270,6 +274,10 @@
                 right: 10px !important;
                 bottom: 10px !important;
                 border-radius: 10px !important;
+            }
+            .large {
+                width: 80vw !important;
+                height: 80vw !important;
             }
         }
         .progress-bar {
