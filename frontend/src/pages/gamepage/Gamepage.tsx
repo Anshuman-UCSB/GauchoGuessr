@@ -77,7 +77,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             const result = await getLink(gameId, Math.floor(gameCount / 2));
             setImg(result);
         };
-        if (gameId !== null) {
+        if (gameId !== null && gameCount % 2 == 0 && gameCount <=8) {
             console.log("Calling getImg with gameId", gameId);
             getImg();
         }
