@@ -82,10 +82,10 @@ function DiffMap(MapProps: MapProps) {
             <Marker
                 position={MapProps.realMarker}
                 label={
-                    "Actual Location: Lat " +
-                    MapProps.realMarker.lat +
-                    " Long " +
-                    MapProps.realMarker.lng
+                    "Actual Location: "//Lat " +
+                    // MapProps.realMarker.lat +
+                    // " Long " +
+                    // MapProps.realMarker.lng
                 }
             >
                 Hello World{" "}
@@ -93,10 +93,10 @@ function DiffMap(MapProps: MapProps) {
             <Marker
                 position={MapProps.UserMarker}
                 label={
-                    "Your Location: Lat " +
-                    MapProps.UserMarker.lat +
-                    " Long " +
-                    MapProps.UserMarker.lng
+                    "Your Location: "//Lat " +
+                    // MapProps.UserMarker.lat +
+                    // " Long " +
+                    // MapProps.UserMarker.lng
                 }
             >
                 {" "}

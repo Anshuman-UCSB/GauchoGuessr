@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import { getLink, getData, registerGame, submitGuess } from "../../utils/api";
+import {getData, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
@@ -32,7 +32,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [curLng, setCurLng] = useState(0);
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
-
     const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
     const [stageScores, setStageScores] = useState([
@@ -72,8 +71,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             submitGuess(time, curLat, curLng, gameId, gameCount);
             setReset(true);
         } else {
-            //console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
-            //submitGuess(time, curLat, curLng, gameId, gameCount);
             setReset(false);
         }
         setGameCount(gameCount + 1);
