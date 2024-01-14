@@ -31,7 +31,7 @@ const CountdownTimer: React.FC<timerProps> = ({handleTime, reset}) => {
 
   return (
     <div>
-      <p>{formatTime(seconds)}</p>
+      <h2>{formatTime(seconds)}</h2>
     </div>
   );
 };
