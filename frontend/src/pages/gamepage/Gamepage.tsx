@@ -37,6 +37,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [img, setImg] = useState("");
     const [stageScores, setStageScores] = useState([null,null,null,null,null]);
     const [stageTimes, setStageTimes] = useState([null,null,null,null,null]);
+    const [realCoords, setRealCoords] = useState(tmpRealCoords);
 
     const handleLat = (lat: number) => {
         setCurLat(lat);
