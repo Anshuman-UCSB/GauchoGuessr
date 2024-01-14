@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import { getLink, getData, registerGame, submitGuess } from "../../utils/api";
+import { getData, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
@@ -105,6 +105,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setImg(result.link);
             setStageScores(result.scores);
             setStageTimes(result.times);
+            setRealCoords(result.realCoords);
         };
         if (gameId !== "invalid" && gameCount % 2 === 0 && gameCount <= 8) {
             console.log("Calling getImg with gameId", gameId);
@@ -211,7 +212,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         {gameCount % 2 === 1 && (
                             <DiffMap
                                 UserMarker={{ lat: curLat, lng: curLng }}
-                                realMarker={tmpRealCoords}
+                                realMarker={realCoords}
                                 distance={0}
                             />
                         )}
