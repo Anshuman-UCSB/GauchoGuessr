@@ -32,7 +32,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [curLng, setCurLng] = useState(0);
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
-
     const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
     const [stageScores, setStageScores] = useState([
@@ -77,8 +76,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             guess();
             setReset(true);
         } else {
-            //console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
-            //submitGuess(time, curLat, curLng, gameId, gameCount);
             setReset(false);
         }
         setGameCount(gameCount + 1);

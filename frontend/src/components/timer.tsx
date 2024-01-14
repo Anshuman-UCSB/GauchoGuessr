@@ -13,10 +13,8 @@ const CountdownTimer: React.FC<timerProps> = ({handleTime, reset}) => {
         setSeconds(0);
     } else {
     const interval = setInterval(() => {
-            setSeconds((prevSeconds) => prevSeconds + 1);
             handleTime(seconds);
-        
-
+            setSeconds((prevSeconds) => prevSeconds + 1);
     }, 1000) ;
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
