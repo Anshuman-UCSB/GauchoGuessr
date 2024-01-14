@@ -46,7 +46,7 @@ const GameOver: React.FC<GameOverProps> = ({
     };
 
     const handleEnterClick = async () => {
-        if (username.length > 0 && username.length < 10) {
+        if (username.length > 0 && username.length <= 10) {
             const cleanInput = DOMPurify.sanitize(username);
             const filteredInput = filter.clean(cleanInput);
             try {
