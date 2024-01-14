@@ -32,7 +32,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [gameCount, setGameCount] = useState(0);
 
     const [gameId, setGameId] = useState(null);
-    const [stage, setStage] = useState(0);
     const [img, setImg] = useState("");
 
     const handleLat = (lat: number) => {
@@ -74,14 +73,14 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
 
     useEffect(() => {
         const getImg = async () => {
-            const result = await getLink(gameId, stage);
+            const result = await getLink(gameId, Math.floor(gameCount/2));
             setImg(result);
         };
         if(gameId !== null){
             console.log("Calling getImg with gameId",gameId);
             getImg();
         }
-    }, [gameId]);
+    }, [gameId, gameCount]);
 
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);

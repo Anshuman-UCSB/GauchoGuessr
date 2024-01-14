@@ -71,7 +71,7 @@ class Api:
 		latlons = []
 		for c,t in self.images.items():
 			latlons.extend([(v['lat'],v['lon']) for v in t])
-		print(len(latlons))
+		# print(len(latlons))
 		if (lat,lon) in latlons:
 			print("already exists")
 			return
@@ -90,7 +90,7 @@ class Api:
 	
 	def getImages(self, n, categories=None):
 		categories = categories or self.images.keys()
-		print(categories)
+		# print(categories)
 		images = []
 		for cat in categories:
 			images.extend(self.images[cat])

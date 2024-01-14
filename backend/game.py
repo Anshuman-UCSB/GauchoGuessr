@@ -1,7 +1,7 @@
 from api import Api
 
 class Game:
-	def __init__(self, size = 2):
+	def __init__(self, size = 5):
 		self.a = Api()
 		self.stages = self.a.getImages(size)
 	def getLink(self, stage):
