@@ -56,7 +56,12 @@ const options = {
     ],
 };
 
-function MyMap() {
+type MyMapProps = {
+    handleLat: (lat: number) => void;
+    handleLng: (lng: number) => void;
+};
+
+const MyMap: React.FC<MyMapProps> = ({ handleLat, handleLng }) => {
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
@@ -69,6 +74,8 @@ function MyMap() {
             lat: e.latLng.lat(),
             lng: e.latLng.lng(),
         });
+        handleLat(e.latLng.lat());
+        handleLng(e.latLng.lng());
     };
     const onLoad = React.useCallback(function callback(map: any) {
         const bounds = new window.google.maps.LatLngBounds();
@@ -101,7 +108,7 @@ function MyMap() {
     ) : (
         <></>
     );
-}
+};
 
 export default React.memo(MyMap);
 
