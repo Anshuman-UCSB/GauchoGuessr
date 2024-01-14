@@ -1,6 +1,6 @@
 .gamepage-wrapper {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: linear-gradient(
         180deg,
         #00467d 0%,
@@ -223,7 +223,7 @@
         }
         .game {
             width: calc(100vw - 20px); // 10px padding on each side
-            height: calc(100vh - 180px); // 60px top, 100px bottom padding
+            height: calc(100dvh - 180px); // 60px top, 100px bottom padding
             top: 60px; // 60px from the top
             left: calc(50%); // 10px divided by 2 because of transform translate
             transform: translate(
