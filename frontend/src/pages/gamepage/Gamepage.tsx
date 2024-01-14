@@ -28,12 +28,13 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isGameOverVisible, setIsGameOverVisible] = useState(false);
-    const [curLat, setCurLat] = useState(0);
-    const [curLng, setCurLng] = useState(0);
+    const [curLat, setCurLat] = useState(34.412103);
+    const [curLng, setCurLng] = useState(-119.853269);
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
     const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
+    const [hack, setHack] = useState(0);
     const [stageScores, setStageScores] = useState([
         null,
         null,
@@ -81,13 +82,17 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             //console.log("score1: " + stageScores[0] + " score2: " + stageScores[1] + " score3: " + stageScores[2] + " score4: " + stageScores[3] + " score5: " + stageScores[4]);
         }
         if (gameCount % 2 === 0) {
-            //console.log("time before reset: " + time);
-
-            const guess = async ()=>{
-                const result = await submitGuess(time, curLat, curLng, gameId, gameCount);
+            const guess = async () => {
+                const result = await submitGuess(
+                    time,
+                    curLat,
+                    curLng,
+                    gameId,
+                    gameCount
+                );
                 setStageScores(result.scores);
                 setStageTimes(result.times);
-            }
+            };
             guess();
             //updateTimeElement(Math.floor(gameCount/2), time);
             console.log("time before reset: " + time);
@@ -116,7 +121,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
 
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [hack]);
 
     useEffect(() => {
         const getImg = async () => {
@@ -141,10 +146,13 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     return (
         <div className="gamepage-wrapper">
             {isMenuVisible && (
-                <Menu handleState={handleState} toggleMenu={toggleMenu} />
+                <Menu handleState={handleState} toggleMenu={toggleMenu} update={()=>{
+                    setHack(Math.random());
+                    setGameCount(0);
+                }} />
             )}
             {isGameOverVisible && (
-                <GameOver score={stageScores
+                <GameOver gameId={gameId} score={stageScores
                                 .filter(
                                     (v: number | null): v is number =>
                                         v !== null

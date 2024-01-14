@@ -5,9 +5,10 @@ import StrokeText from "../stroketext/StrokeText";
 type MenuProps = {
     handleState: () => void;
     toggleMenu: () => void;
+    update: ()=>void;
 };
 
-const Menu: React.FC<MenuProps> = ({ handleState, toggleMenu }) => {
+const Menu: React.FC<MenuProps> = ({ handleState, toggleMenu, update }) => {
     return (
         <div className="menu">
             <div className="menu-box">
@@ -27,7 +28,7 @@ const Menu: React.FC<MenuProps> = ({ handleState, toggleMenu }) => {
                         webkitTextStroke="5px black"
                     />
                 </button>
-                <button className="restart">
+                <button className="restart" onClick={()=>{toggleMenu();update();}}>
                     <StrokeText
                         text="RESTART"
                         fontFamily="'Inter', sans-serif"

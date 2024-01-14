@@ -10,8 +10,8 @@ class Game:
 	def getLink(self, stage):
 		return self.stages[stage]['img']
 	def calcScore(self, dx, dy, time):
-		l2 = (dx**2 + dy**2)**.5 * 1000
-		return 100/(l2**.5)
+		l2 = (dx**2 + dy**2)**.5 * 111320
+		return int(max(min(max(10000-200*l2**.5, 8000-500*l2**.3),9500) + max(500-time**2,0),0))
 
 	def guess(self, time, lat, lon, stage):
 		rlat = self.stages[stage]['lat']
