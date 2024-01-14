@@ -19,7 +19,7 @@ type GamepageProps = {
     handleState: () => void;
 };
 const tmpRealCoords = {
-    lat: 34.4140,
+    lat: 34.414,
     lng: -119.8489,
 };
 
@@ -164,9 +164,20 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                     <div className="image">
                         <Pano key={img} width="100%" height="100%" src={img} title="" />
                     </div>
-                    <div className={gameCount % 2 === 0 ? "map" : "map large"}>
-                        {gameCount % 2 === 0 && <MyMap handleLat={handleLat} handleLng={handleLng} />}
-                        {gameCount % 2 === 1 && <DiffMap UserMarker={{lat: curLat, lng: curLng}} realMarker={tmpRealCoords} distance={0}/>}
+                    <div className={gameCount % 2 === 0 ? "map" : "map-large"}>
+                        {gameCount % 2 === 0 && (
+                            <MyMap
+                                handleLat={handleLat}
+                                handleLng={handleLng}
+                            />
+                        )}
+                        {gameCount % 2 === 1 && (
+                            <DiffMap
+                                UserMarker={{ lat: curLat, lng: curLng }}
+                                realMarker={tmpRealCoords}
+                                distance={0}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
