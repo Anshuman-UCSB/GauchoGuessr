@@ -22,7 +22,7 @@ class Api:
 		print("loaded leaderboards")
 
 		self.images = {}
-		for cat in ('street',"store"):
+		for cat in ("all",):
 			self.images[cat]=[v.to_dict() for v in self.db.collection("images").document("categories").collection(cat).stream()]
 		print("loaded images")
 
@@ -90,6 +90,7 @@ class Api:
 	
 	def getImages(self, n, categories=None):
 		categories = categories or self.images.keys()
+		print(categories)
 		images = []
 		for cat in categories:
 			images.extend(self.images[cat])
@@ -105,3 +106,45 @@ if __name__=="__main__":
 	# a.storeImage("https://imgur.com/UDY4o3P",34.4107781, -119.8569044,  "street")
 	# a.incrementUsers()
 	print(a.getImages(2))
+	raw="""
+34.4101267, -119.8544833 ,		https://imgur.com/wK19FIx
+34.4097920, -119.8540924 ,		https://imgur.com/eZm8cdn
+34.4107781, -119.8569044 ,		https://imgur.com/IYOzls4
+34.4110129, -119.8570717 ,		https://imgur.com/Mbvt7yt
+34.4113974, -119.8573365 ,		https://imgur.com/6Kb7uri
+34.4122311, -119.8574505 ,		https://imgur.com/9Dd1yOr
+34.4122692, -119.8576882 ,		https://imgur.com/X2L9Ulm
+34.4127682, -119.8577412 ,		https://imgur.com/dw688n4
+34.4127334, -119.8573245 ,		https://imgur.com/tNAzDwd
+34.4128501, -119.8572440 ,		https://imgur.com/AyfDK9G
+34.4106763, -119.8559498 ,		https://imgur.com/ypERJeU
+34.4131242, -119.8532619 ,		https://imgur.com/Gf4lcXo
+34.4123782, -119.8510971 ,		https://imgur.com/ias35mm
+34.4119481, -119.8510883 ,		https://imgur.com/Q0Mczvo
+34.4112367, -119.8500091 ,		https://imgur.com/qTgqXFi
+34.4116997, -119.8486888 ,		https://imgur.com/zbHrWBo
+34.4095889, -119.8475971 ,		https://imgur.com/7RRBrdy
+34.4089740, -119.8460297 ,		https://imgur.com/s584ntF
+34.4092542, -119.8450842 ,		https://imgur.com/BYJgnNW
+34.4100487, -119.8444593 ,		https://imgur.com/TPs9qZU
+34.4104279, -119.8431339 ,		https://imgur.com/bk9fsbv
+34.4120460, -119.8419826 ,		https://imgur.com/zrDVZ3P
+34.4135325, -119.8413502 ,		https://imgur.com/RkSG7OJ
+34.4136326, -119.8411554 ,		https://imgur.com/ozF9whK
+34.4136019, -119.8421318 ,		https://imgur.com/Y51yOzx
+34.4148640, -119.8427182 ,		https://imgur.com/pQnJd52
+34.4148554, -119.8446748 ,		https://imgur.com/OAJE8fX
+34.4155784,	-119.8450899 ,	https://imgur.com/1bGQa0V
+34.4140583,	-119.846263	 ,https://imgur.com/nWNeHs4
+34.4134049,	-119.8456378 ,	https://imgur.com/0crLEqe
+34.4135383,	-119.8455207 ,	https://imgur.com/w3MXjNw
+34.4125218,	-119.8478378 ,	https://imgur.com/tfHh8Nb
+34.4116906,	-119.8470013 ,	https://imgur.com/kxSonVU
+34.4114203,	-119.8473534 ,	https://imgur.com/DXlS24D
+34.4128692,	-119.8499447 ,	https://imgur.com/IQvZv3O
+34.4111114,	-119.8538319 ,	https://imgur.com/LX3Kqyn
+	"""
+	# for l in raw.strip().splitlines():
+	# 	lat,lon,link = map(lambda x: x.strip(), l.split(','))
+	# 	print(lat, lon, link)
+	# 	a.storeImage(link,float(lat), float(lon), "all")
