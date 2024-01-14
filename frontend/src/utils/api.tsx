@@ -17,11 +17,11 @@ export const registerGame = async () => {
 	}
 }
 
-export const getLink = async (gameId: string | null,stage: number) => {
+export const getData = async (gameId: string | null,stage: number) => {
 	try {
 		console.log("Sending request");
 		const response = await apiService.get(`/game/${gameId}?stage=${stage}`);
-		return response.data.link;
+		return response.data;
 	} catch (error) {
 		console.log("error in getLink!");
 		throw error;
