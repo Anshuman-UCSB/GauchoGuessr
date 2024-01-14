@@ -10,10 +10,15 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 import "./Gamepage.scss";
 import Pano from "../../components/Pano";
 import MyMap from "../../components/Map";
-import DiffMap from "../../components/MapDiff";
+import Menu from "../../components/menu/Menu";
 
-export default function Gamepage() {
+type GamepageProps = {
+    handleState: () => void;
+};
+
+const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
 
     useEffect(() => {
         function handleResize() {
@@ -28,8 +33,15 @@ export default function Gamepage() {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    const toggleMenu = () => {
+        setIsMenuVisible(!isMenuVisible);
+    };
     return (
         <div className="gamepage-wrapper">
+            {isMenuVisible && (
+                <Menu handleState={handleState} toggleMenu={toggleMenu} />
+            )}
             <div className="logo">
                 <img src={Left} alt="" />
                 <div className="logo-text">
@@ -67,7 +79,7 @@ export default function Gamepage() {
                     </div>
                 </div>
             </div>
-            <div className="menu-button">
+            <div className="menu-button" onClick={toggleMenu}>
                 <img src={Right} alt="" />
                 <div className="icon">
                     <FontAwesomeIcon
@@ -135,4 +147,6 @@ export default function Gamepage() {
             </div>
         </div>
     );
-}
+};
+
+export default Gamepage;

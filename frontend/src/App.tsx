@@ -12,7 +12,7 @@ function App() {
     return (
         <div className="App">
             {state === 1 && <Homepage handleState={handleState} />}
-            {state === 2 && <Gamepage />}
+            {state === 2 && <Gamepage handleState={handleState} />}
         </div>
     );
 }
