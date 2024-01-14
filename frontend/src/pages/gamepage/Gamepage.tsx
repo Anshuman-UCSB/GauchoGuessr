@@ -46,11 +46,12 @@ export default function Gamepage() {
             </div>
             <div className="game">
                 <div className="timer">
+                    <img src={Timer} alt="" />
                     <div className="time">
-                        <h2></h2>
+                        <h2>05:53</h2>
                     </div>
                     <div className="score">
-                        <h3></h3>
+                        <h3>31,415</h3>
                     </div>
                 </div>
                 <div className="image-wrapper">
