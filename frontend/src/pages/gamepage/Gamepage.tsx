@@ -22,10 +22,20 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isGameOverVisible, setIsGameOverVisible] = useState(false);
-    
+    const [curLat, setCurLat] = useState(0);
+    const [curLng, setCurLng] = useState(0);
+    const [gameCount, setGameCount] = useState(0);
+
     const [gameId, setGameId] = useState(null);
     const [stage, setStage] = useState(0);
     const [img, setImg] = useState("");
+
+    const progressGame = () => {
+        if (gameCount % 2 === 0) {
+        } else {
+        }
+        setGameCount(gameCount + 1);
+    };
 
     useEffect(() => {
         function handleResize() {
@@ -39,7 +49,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         const setupGame = async () => {
             const result = await registerGame();
             setGameId(result);
-        }
+        };
         setupGame();
 
         // Remove event listener on cleanup
@@ -50,7 +60,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         const getImg = async () => {
             const result = await getLink(gameId, stage);
             setImg(result);
-        }
+        };
         gameId || getImg();
     }, [gameId]);
 
@@ -134,12 +144,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 </div>
                 <div className="image-wrapper">
                     <div className="image">
-                        <Pano
-                            width="100%"
-                            height="100%"
-                            src={img}
-                            title=""
-                        />
+                        <Pano width="100%" height="100%" src={img} title="" />
                     </div>
                     <div className="map">
                         <MyMap />
@@ -154,22 +159,41 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Progress index={5} position="end"></Progress>
             </div>
             <div className="submit-wrapper">
-                <button onClick={showGameOver}>
-                    <StrokeText
-                        text="SUBMIT"
-                        fontFamily="'Inter', sans-serif"
-                        color="#fff"
-                        fontSize="25px"
-                        fontStyle="italic"
-                        fontWeight="900"
-                        lineHeight="25px"
-                        textAlign="left"
-                        shadowColor="#000"
-                        xOffset="0px"
-                        yOffset="0px"
-                        webkitTextStroke="5px black"
-                    />
-                </button>
+                {gameCount % 2 === 0 ? (
+                    <button onClick={progressGame}>
+                        <StrokeText
+                            text="SUBMIT"
+                            fontFamily="'Inter', sans-serif"
+                            color="#fff"
+                            fontSize="25px"
+                            fontStyle="italic"
+                            fontWeight="900"
+                            lineHeight="25px"
+                            textAlign="left"
+                            shadowColor="#000"
+                            xOffset="0px"
+                            yOffset="0px"
+                            webkitTextStroke="5px black"
+                        />
+                    </button>
+                ) : (
+                    <button onClick={progressGame}>
+                        <StrokeText
+                            text="SUBMIT"
+                            fontFamily="'Inter', sans-serif"
+                            color="#fff"
+                            fontSize="25px"
+                            fontStyle="italic"
+                            fontWeight="900"
+                            lineHeight="25px"
+                            textAlign="left"
+                            shadowColor="#000"
+                            xOffset="0px"
+                            yOffset="0px"
+                            webkitTextStroke="5px black"
+                        />
+                    </button>
+                )}
             </div>
         </div>
     );
