@@ -14,6 +14,7 @@ import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
 import { getLink, registerGame } from "../../utils/api";
+import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
     handleState: () => void;
@@ -154,7 +155,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <h2>05:53</h2>
+                        <CountdownTimer/>
                     </div>
                     <div className="score">
                         <h3>31,415</h3>
