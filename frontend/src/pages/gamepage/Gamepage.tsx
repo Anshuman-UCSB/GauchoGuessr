@@ -28,12 +28,13 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isGameOverVisible, setIsGameOverVisible] = useState(false);
-    const [curLat, setCurLat] = useState(0);
-    const [curLng, setCurLng] = useState(0);
+    const [curLat, setCurLat] = useState(34.412103);
+    const [curLng, setCurLng] = useState(-119.853269);
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
     const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
+    const [hack, setHack] = useState(0);
     const [stageScores, setStageScores] = useState([
         null,
         null,
@@ -105,7 +106,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
 
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [hack]);
 
     useEffect(() => {
         const getImg = async () => {
@@ -130,7 +131,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     return (
         <div className="gamepage-wrapper">
             {isMenuVisible && (
-                <Menu handleState={handleState} toggleMenu={toggleMenu} />
+                <Menu handleState={handleState} toggleMenu={toggleMenu} update={()=>{
+                    setHack(Math.random());
+                    setGameCount(0);
+                }} />
             )}
             {isGameOverVisible && (
                 <GameOver
