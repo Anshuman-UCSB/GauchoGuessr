@@ -33,10 +33,22 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
 
-    const [gameId, setGameId] = useState("");
+    const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
-    const [stageScores, setStageScores] = useState([null,null,null,null,null]);
-    const [stageTimes, setStageTimes] = useState([null,null,null,null,null]);
+    const [stageScores, setStageScores] = useState([
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
+    const [stageTimes, setStageTimes] = useState([
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
     const [realCoords, setRealCoords] = useState(tmpRealCoords);
 
     const [reset, setReset] = useState(false);
@@ -57,10 +69,11 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
+            submitGuess(time, curLat, curLng, gameId, gameCount);
             setReset(true);
         } else {
-            console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
-            submitGuess(time, curLat, curLng, gameId, gameCount);
+            //console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
+            //submitGuess(time, curLat, curLng, gameId, gameCount);
             setReset(false);
         }
         setGameCount(gameCount + 1);
@@ -93,11 +106,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setStageScores(result.scores);
             setStageTimes(result.times);
         };
-        if (gameId !== null && gameCount % 2 === 0 && gameCount <=8) {
+        if (gameId !== "invalid" && gameCount % 2 === 0 && gameCount <= 8) {
             console.log("Calling getImg with gameId", gameId);
             getImg();
         }
-
     }, [gameId, gameCount]);
 
     const toggleMenu = () => {
@@ -206,11 +218,33 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 </div>
             </div>
             <div className="progress-bar">
-                <Progress index={1} score={stageScores[0]} time={stageTimes[0]} position="start"></Progress>
-                <Progress index={2} score={stageScores[1]} time={stageTimes[1]}></Progress>
-                <Progress index={3} score={stageScores[2]} time={stageTimes[2]}></Progress>
-                <Progress index={4} score={stageScores[3]} time={stageTimes[3]}></Progress>
-                <Progress index={5} score={stageScores[4]} time={stageTimes[4]} position="end"></Progress>
+                <Progress
+                    index={1}
+                    score={stageScores[0]}
+                    time={stageTimes[0]}
+                    position="start"
+                ></Progress>
+                <Progress
+                    index={2}
+                    score={stageScores[1]}
+                    time={stageTimes[1]}
+                ></Progress>
+                <Progress
+                    index={3}
+                    score={stageScores[2]}
+                    time={stageTimes[2]}
+                ></Progress>
+                <Progress
+                    index={4}
+                    score={stageScores[3]}
+                    time={stageTimes[3]}
+                ></Progress>
+                <Progress
+                    index={5}
+                    score={stageScores[4]}
+                    time={stageTimes[4]}
+                    position="end"
+                ></Progress>
             </div>
             <div className="submit-wrapper">
                 {gameCount % 2 === 0 ? (
