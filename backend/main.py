@@ -84,7 +84,7 @@ def getData(gameid: str, stage:int, res: Response):
 def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response):
     game = games[gameid]
     game.guess(time, lat, lon, stage)
-    return {"realCoords":{"lat":game[stage]['lat'],"lon":game[stage]['lon']}}
+    return {"realCoords":{"lat":game.stages[stage]['lat'],"lon":game.stages[stage]['lon']}}
 
 
 if __name__ == "__main__":
