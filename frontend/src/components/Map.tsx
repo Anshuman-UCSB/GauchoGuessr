@@ -29,7 +29,7 @@ const SbBounds = {
 
 const center = {
     //Coordinates of Pardall Tunnel
-    lat: 34.413103,
+    lat: 34.412103,
     lng: -119.853269,
 };
 const options = {
