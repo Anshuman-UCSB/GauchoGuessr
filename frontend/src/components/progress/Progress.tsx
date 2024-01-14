@@ -1,4 +1,5 @@
 import React from "react";
+import "./Progress.scss";
 
 // Define the interface for the component props
 interface ProgressProps {
@@ -16,15 +17,16 @@ const Progress: React.FC<ProgressProps> = ({
     position,
 }) => {
     // Construct the class name based on the props
-    const className = `prog-rect${index !== undefined ? ` ${index}` : ""}${
-        position ? ` ${position}` : ""
-    }`;
+    const className = `prog-rect${
+        index !== undefined ? ` index-${index}` : ""
+    }${position ? ` ${position}` : ""}`;
 
     return (
         <div className={className}>
-            {index !== undefined && <div>Index: {index}</div>}
-            <div>Score: {score !== null ? score?.toLocaleString() : "N/A"}</div>
-            <div>Time: {time ?? "N/A"}</div>
+            <div className="text-wrapper">
+                <h2>{score !== undefined ? score?.toLocaleString() : "N/A"}</h2>
+                <h3>{time ?? "N/A"}</h3>
+            </div>
         </div>
     );
 };
