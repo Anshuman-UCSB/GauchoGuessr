@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Progress from "../../components/progress/Progress";
 import Right from "./Right.svg";
 import Left from "./Left.svg";
 import Timer from "./Timer.svg";
+import SmallTimer from "./SmallTimer.svg";
 import StrokeText from "../../components/stroketext/StrokeText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -12,25 +13,58 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 
 export default function Gamepage() {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener("resize", handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     return (
         <div className="gamepage-wrapper">
             <div className="logo">
                 <img src={Left} alt="" />
                 <div className="logo-text">
-                    <StrokeText
-                        text="GAUCHO GUESSR"
-                        fontFamily="'Inter', sans-serif"
-                        color="#fff"
-                        fontSize="25px"
-                        fontStyle="italic"
-                        fontWeight="900"
-                        lineHeight="25px"
-                        textAlign="left"
-                        shadowColor="#000"
-                        xOffset="0px"
-                        yOffset="0px"
-                        webkitTextStroke="5px black"
-                    />
+                    <div className="full-logo">
+                        <StrokeText
+                            text="GAUCHO GUESSR"
+                            fontFamily="'Inter', sans-serif"
+                            color="#fff"
+                            fontSize="25px"
+                            fontStyle="italic"
+                            fontWeight="900"
+                            lineHeight="25px"
+                            textAlign="left"
+                            shadowColor="#000"
+                            xOffset="0px"
+                            yOffset="0px"
+                            webkitTextStroke="5px black"
+                        />
+                    </div>
+                    <div className="short-logo">
+                        <StrokeText
+                            text="GG"
+                            fontFamily="'Inter', sans-serif"
+                            color="#fff"
+                            fontSize="30px"
+                            fontStyle="italic"
+                            fontWeight="900"
+                            lineHeight="30px"
+                            textAlign="left"
+                            shadowColor="#000"
+                            xOffset="0px"
+                            yOffset="0px"
+                            webkitTextStroke="5px black"
+                        />
+                    </div>
                 </div>
             </div>
             <div className="menu-button">
@@ -49,7 +83,10 @@ export default function Gamepage() {
             </div>
             <div className="game">
                 <div className="timer">
-                    <img src={Timer} alt="" />
+                    <img
+                        src={windowWidth < 817 ? SmallTimer : Timer}
+                        alt="Timer"
+                    />
                     <div className="time">
                         <h2>05:53</h2>
                     </div>

@@ -13,6 +13,9 @@
         img {
             width: 300px;
         }
+        .short-logo {
+            display: none;
+        }
         .logo-text {
             position: absolute;
             top: 15px;
@@ -144,9 +147,11 @@
             .logo-text {
                 top: 10px;
                 width: 100px;
-                .stroke-text {
-                    font-size: 20px !important;
-                    line-height: 20px !important;
+                .full-logo {
+                    .stroke-text {
+                        font-size: 20px !important;
+                        line-height: 20px !important;
+                    }
                 }
             }
         }
@@ -192,13 +197,16 @@
             img {
                 display: none;
             }
+            .full-logo {
+                display: none;
+            }
+            .short-logo {
+                display: block;
+            }
             .logo-text {
-                top: 10px;
+                top: 20px;
+                left: 10px;
                 width: 100px;
-                .stroke-text {
-                    font-size: 20px !important;
-                    line-height: 20px !important;
-                }
             }
         }
         .menu-button {
@@ -206,30 +214,36 @@
                 display: none;
             }
             .icon {
-                right: 80px;
-                top: 12px;
+                right: 20px;
+                top: 20px;
                 svg {
                     height: 30px !important;
                 }
             }
         }
         .game {
-            width: calc(100vw - 20px);
-            height: calc(100vh - 200px);
+            width: calc(100vw - 20px); // 10px padding on each side
+            height: calc(100vh - 180px); // 60px top, 100px bottom padding
+            top: 60px; // 60px from the top
+            left: calc(50%); // 10px divided by 2 because of transform translate
+            transform: translate(
+                -50%,
+                0
+            ); // adjusted to only horizontally center
             .timer {
-                top: -40px;
+                top: -49px;
                 height: 90px;
                 img {
                     width: 200px;
                 }
                 .time {
-                    top: 14%;
+                    top: 20%;
                     h2 {
                         font-size: 18px;
                     }
                 }
                 .score {
-                    top: 30%;
+                    top: 35%;
                     h3 {
                         font-size: 10px;
                     }
