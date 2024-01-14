@@ -41,7 +41,7 @@ export const getLeaderboard = async () => {
 export const submitLeaderboard = async (gameid:string, name:string) => {
 	try {
 		console.log("Sending request");
-		const response = await apiService.get(`/game/${gameid}/submit?name=${name}`);
+		const response = await apiService.post(`/game/${gameid}/submit?name=${name}`);
 		return response.data;
 	} catch (error) {
 		throw error;
