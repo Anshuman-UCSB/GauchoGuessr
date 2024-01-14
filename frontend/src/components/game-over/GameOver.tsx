@@ -4,15 +4,22 @@ import TopPoly from "./TopPoly.svg";
 import StrokeText from "../stroketext/StrokeText";
 import DOMPurify from "dompurify";
 import Filter from "bad-words";
+import { submitLeaderboard } from "../../utils/api";
 interface GameOverProps {
     score: number;
     time: string;
+    gameId: string;
     handleState: () => void;
 }
 
 const filter = new Filter();
 
-const GameOver: React.FC<GameOverProps> = ({ score, time, handleState }) => {
+const GameOver: React.FC<GameOverProps> = ({
+    score,
+    time,
+    handleState,
+    gameId,
+}) => {
     const [username, setUsername] = useState("");
 
     const handleUsernameChange = (
@@ -32,7 +39,8 @@ const GameOver: React.FC<GameOverProps> = ({ score, time, handleState }) => {
             if (username.length < 30) {
                 const cleanInput = DOMPurify.sanitize(username);
                 const filteredInput = filter.clean(cleanInput);
-                console.log("Username entered:", filteredInput);
+                console.log(gameId, filteredInput);
+                submitLeaderboard(gameId, filteredInput);
             } else {
                 alert("must be between 1 and 30 characters");
             }

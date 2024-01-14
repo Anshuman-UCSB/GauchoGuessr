@@ -68,11 +68,17 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
-            const guess = async ()=>{
-                const result = await submitGuess(time, curLat, curLng, gameId, gameCount);
+            const guess = async () => {
+                const result = await submitGuess(
+                    time,
+                    curLat,
+                    curLng,
+                    gameId,
+                    gameCount
+                );
                 setStageScores(result.scores);
                 setStageTimes(result.times);
-            }
+            };
             guess();
             setReset(true);
         } else {
@@ -127,12 +133,14 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Menu handleState={handleState} toggleMenu={toggleMenu} />
             )}
             {isGameOverVisible && (
-                <GameOver score={stageScores
-                                .filter(
-                                    (v: number | null): v is number =>
-                                        v !== null
-                                )
-                                .reduce((acc: number, cv: any) => acc + cv, 0)} time="7:37" handleState={handleState} />
+                <GameOver
+                    gameId={gameId}
+                    score={stageScores
+                        .filter((v: number | null): v is number => v !== null)
+                        .reduce((acc: number, cv: any) => acc + cv, 0)}
+                    time="7:37"
+                    handleState={handleState}
+                />
             )}
             <div className="logo">
                 <img src={Left} alt="" />
