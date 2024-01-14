@@ -8,6 +8,7 @@ const containerStyle = {
 };
 
 const SbBounds = {
+  //Values approximating the region around UCSB/Isla Vista
     se: {
         lat: 34.40421,
         lng: -119.844215,
