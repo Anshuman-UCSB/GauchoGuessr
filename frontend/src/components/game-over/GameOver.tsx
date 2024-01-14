@@ -21,17 +21,25 @@ const GameOver: React.FC<GameOverProps> = ({ score, time, handleState }) => {
         const input = event.target.value;
         if (input) {
             // Check if the input is not null or undefined
-            const cleanInput = DOMPurify.sanitize(input);
-            const filteredInput = filter.clean(cleanInput);
-            setUsername(filteredInput);
+            setUsername(input);
         } else {
             setUsername(""); // Or handle as appropriate for your application
         }
     };
 
     const handleEnterClick = () => {
+        if (username.length > 0) {
+            if (username.length < 30) {
+                const cleanInput = DOMPurify.sanitize(username);
+                const filteredInput = filter.clean(cleanInput);
+                console.log("Username entered:", filteredInput);
+            } else {
+                alert("must be between 1 and 30 characters");
+            }
+        } else {
+            alert("must be between 1 and 30 characters");
+        }
         // Here you would typically handle the username submission
-        console.log("Username entered:", username);
     };
 
     const handleShareClick = () => {
