@@ -17,8 +17,8 @@ type HomepageProps = {
 
 const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [usersScores, setUsersScores]=useState<UserScore[]>([]);
-    const [error, setError] = useState<Error|null>(null);
+    const [usersScores, setUsersScores] = useState<UserScore[]>([]);
+    const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     // TODO: use error/loading for conditional rendering
 
@@ -35,17 +35,17 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-        setIsLoading(true);
+            setIsLoading(true);
 
-        try {
-            const result = await getLeaderboard();
-            setUsersScores(result);
-        } catch (error:any) {
-            setError(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+            try {
+                const result = await getLeaderboard();
+                setUsersScores(result);
+            } catch (error: any) {
+                setError(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
         fetchData();
     }, []);
