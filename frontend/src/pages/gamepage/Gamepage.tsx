@@ -49,6 +49,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         null,
         null,
     ]);
+    const [realCoords, setRealCoords] = useState(tmpRealCoords);
 
     const handleLat = (lat: number) => {
         setCurLat(lat);

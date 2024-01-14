@@ -6,10 +6,13 @@ class Game:
 		self.stages = self.a.getImages(size)
 		self.score = 0
 		self.stageScores = [None]*size
+		self.stageTimes = [None]*size
 	def getLink(self, stage):
 		return self.stages[stage]['img']
 	def guess(self, time, lat, lon, stage):
-		stage = self.stages[stage]
-		print(stage)
+		rlat = self.stages[stage]['lat']
+		rlon = self.stages[stage]['lon']
+		print(self.stages[stage])
 		self.stageScores[stage] = 1
-		self.score=sum(self.stageScores)
+		self.stageTimes[stage] = time
+		self.score=sum([v for v in self.stageScores if v is not None])
