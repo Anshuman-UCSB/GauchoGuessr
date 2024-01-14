@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import { getLink, registerGame } from "../../utils/api";
+import { getLink, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
@@ -33,8 +33,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
 
-    const [gameId, setGameId] = useState(null);
+    const [gameId, setGameId] = useState("");
     const [img, setImg] = useState("");
+
+    const [reset, setReset] = useState(false);
 
     const handleLat = (lat: number) => {
         setCurLat(lat);
@@ -44,14 +46,19 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     };
     const handleTime = (time: number) => {
         setTime(time);
+        return time;
     };
+
     const progressGame = () => {
         if (gameCount >= 9) {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
-            console.log("submitted!");
+            setReset(true);
         } else {
+            console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
+            submitGuess(time, curLat, curLng, gameId, gameCount);
+            setReset(false);
         }
         setGameCount(gameCount + 1);
         console.log(curLat, curLng);
@@ -81,7 +88,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             const result = await getLink(gameId, Math.floor(gameCount / 2));
             setImg(result);
         };
-        if (gameId !== null && gameCount % 2 == 0 && gameCount <=8) {
+        if (gameId !== null && gameCount % 2 === 0 && gameCount <=8) {
             console.log("Calling getImg with gameId", gameId);
             getImg();
         }
@@ -159,7 +166,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <CountdownTimer handleTime={handleTime}/>
+                        <CountdownTimer handleTime={handleTime} reset={reset}/>
                     </div>
                     <div className="score">
                         <h3>31,415</h3>
