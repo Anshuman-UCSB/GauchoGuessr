@@ -31,7 +31,11 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [img, setImg] = useState("");
 
     const progressGame = () => {
+        if (gameCount >= 8) {
+            setIsGameOverVisible(true);
+        }
         if (gameCount % 2 === 0) {
+            console.log("submitted!");
         } else {
         }
         setGameCount(gameCount + 1);
@@ -146,7 +150,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                     <div className="image">
                         <Pano width="100%" height="100%" src={img} title="" />
                     </div>
-                    <div className="map">
+                    <div className={gameCount % 2 === 0 ? "map" : "map large"}>
                         <MyMap />
                     </div>
                 </div>
@@ -179,7 +183,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 ) : (
                     <button onClick={progressGame}>
                         <StrokeText
-                            text="SUBMIT"
+                            text="NEXT"
                             fontFamily="'Inter', sans-serif"
                             color="#fff"
                             fontSize="25px"
