@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Leaderboard from "../../components/leaderboard/Leaderboard";
 import StrokeText from "../../components/stroketext/StrokeText";
 import "./Homepage.scss";
+import { getLeaderboard } from "../../utils/api";
 
 type UserScore = {
-    username: string;
+    name: string;
     score: number;
 };
 
@@ -12,39 +13,14 @@ type HomepageProps = {
     handleState: () => void;
 };
 
-const usersScores: UserScore[] = [
-    { username: "User123", score: 45678 },
-    { username: "JohnDoe456", score: 37890 },
-    { username: "TechGeek007", score: 62543 },
-    { username: "CodingMaster99", score: 54321 },
-    { username: "GamerGirl23", score: 48765 },
-    { username: "WebDevPro555", score: 57890 },
-    { username: "DesignWizard123", score: 60123 },
-    { username: "HackerElite789", score: 52345 },
-    { username: "CodeNinja456", score: 49876 },
-    { username: "DigitalArtist22", score: 42109 },
-    { username: "CyberSecExpert777", score: 55432 },
-    { username: "AIEnthusiast555", score: 51234 },
-    { username: "TechSavvyGirl69", score: 53987 },
-    { username: "WebDesignPro222", score: 59876 },
-    { username: "User123", score: 45678 },
-    { username: "JohnDoe456", score: 37890 },
-    { username: "TechGeek007", score: 62543 },
-    { username: "CodingMaster99", score: 54321 },
-    { username: "GamerGirl23", score: 48765 },
-    { username: "WebDevPro555", score: 57890 },
-    { username: "DesignWizard123", score: 60123 },
-    { username: "HackerElite789", score: 52345 },
-    { username: "CodeNinja456", score: 49876 },
-    { username: "DigitalArtist22", score: 42109 },
-    { username: "CyberSecExpert777", score: 55432 },
-    { username: "AIEnthusiast555", score: 51234 },
-    { username: "TechSavvyGirl69", score: 53987 },
-    { username: "WebDesignPro222", score: 59876 },
-];
+// const usersScores: UserScore[] = await getLeaderboard();
 
 const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [usersScores, setUsersScores]=useState<UserScore[]>([]);
+    const [error, setError] = useState<Error|null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    // TODO: use error/loading for conditional rendering
 
     useEffect(() => {
         const handleResize = () => {
@@ -55,6 +31,23 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
 
         // Clean up the event listener when the component unmounts
         return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        setIsLoading(true);
+
+        try {
+            const result = await getLeaderboard();
+            setUsersScores(result);
+        } catch (error:any) {
+            setError(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    fetchData();
     }, []);
 
     // Function to determine font size based on screen width

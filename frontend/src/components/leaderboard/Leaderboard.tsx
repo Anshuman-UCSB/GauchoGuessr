@@ -3,7 +3,7 @@ import StrokeText from "../stroketext/StrokeText";
 import "./Leaderboard.scss";
 
 interface UserScore {
-    username: string;
+    name: string;
     score: number;
 }
 
@@ -13,9 +13,9 @@ interface LeaderboardProps {
 
 export default function Leaderboard({ usersScores }: LeaderboardProps) {
     // Function to calculate the number of dots needed based on text length
-    const calculateDots = (username: string, score: number) => {
+    const calculateDots = (name: string, score: number) => {
         const maxLength = 40; // Adjust this based on your layout width
-        const currentLength = username.length + score.toString().length;
+        const currentLength = name.length + score.toString().length;
         return ".".repeat(maxLength - currentLength);
     };
 
@@ -38,9 +38,9 @@ export default function Leaderboard({ usersScores }: LeaderboardProps) {
             <div className="user-list">
                 {usersScores.map((userScore, index) => (
                     <div key={index} className="user-score">
-                        <span className="username">{userScore.username}</span>
+                        <span className="username">{userScore.name}</span>
                         <span className="dots">
-                            {calculateDots(userScore.username, userScore.score)}
+                            {calculateDots(userScore.name, userScore.score)}
                         </span>
                         <span className="score">
                             {userScore.score.toLocaleString()}
