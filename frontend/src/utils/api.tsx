@@ -37,3 +37,14 @@ export const getLeaderboard = async () => {
 		throw error;
 	}
 }
+
+export const submitGuess = async (time:number, lat:number, lon:number, gameid:string, gameCount:number) => {
+	const stage = Math.floor(gameCount/2);
+	try {
+		console.log("Sending request");
+		const response = await apiService.post(`/game/${gameid}?lat=${lat}&lon=${lon}&time=${time}&stage=${stage}`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+}

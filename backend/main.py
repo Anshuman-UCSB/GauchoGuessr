@@ -79,6 +79,12 @@ def getLink(gameid: str, stage:int, res: Response):
     else:
         return {"link":games[gameid].getLink(stage)}
 
+@app.post("/game/{gameid}/", status_code=200, response_class=PrettyJSONResponse)
+def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response):
+    game = games[gameid]
+    game.guess(time, lat, lon, stage)
+    return {"total":game.score, "0":game.stageScores[0], "1":game.stageScores[1], "2":game.stageScores[2], "3":game.stageScores[3], "4":game.stageScores[4]}
+
 
 if __name__ == "__main__":
     import uvicorn
