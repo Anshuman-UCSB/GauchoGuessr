@@ -72,7 +72,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             const result = await getLink(gameId, stage);
             setImg(result);
         };
-        gameId || getImg();
+        if(gameId !== null){
+            console.log("Calling getImg with gameId",gameId);
+            getImg();
+        }
     }, [gameId]);
 
     const toggleMenu = () => {
@@ -155,7 +158,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 </div>
                 <div className="image-wrapper">
                     <div className="image">
-                        <Pano width="100%" height="100%" src={img} title="" />
+                        <Pano key={img} width="100%" height="100%" src={img} title="" />
                     </div>
                     <div className={gameCount % 2 === 0 ? "map" : "map large"}>
                         <MyMap handleLat={handleLat} handleLng={handleLng} />
