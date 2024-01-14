@@ -86,6 +86,11 @@ def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response)
     game.guess(time, lat, lon, stage)
     return {"scores":game.stageScores, "times":game.stageTimes}
 
+@app.post("/game/{gameid}/submit", status_code=200, response_class=PrettyJSONResponse)
+def guess(gameid: str, name:str, res: Response):
+    game = games[gameid]
+    return api.setScore("default", name, game.score)
+
 
 if __name__ == "__main__":
     import uvicorn

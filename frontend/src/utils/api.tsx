@@ -38,6 +38,16 @@ export const getLeaderboard = async () => {
 	}
 }
 
+export const submitLeaderboard = async (gameid:string, name:string) => {
+	try {
+		console.log("Sending request");
+		const response = await apiService.get(`/game/${gameid}/submit?name=${name}`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+}
+
 export const submitGuess = async (time:number, lat:number, lon:number, gameid:string, gameCount:number) => {
 	const stage = Math.floor(gameCount/2);
 	try {
