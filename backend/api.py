@@ -64,11 +64,11 @@ class Api:
 	def getPotentialPosition(self, score):
 		def translate(pos):
 			pos+=1
-			if pos == 1:
+			if pos%10 == 1:
 				return "1st!"
-			if pos == 2:
+			if pos%10 == 2:
 				return "2nd"
-			if pos == 3:
+			if pos%10 == 3:
 				return "3rd"
 			return f"{pos}th"
 
