@@ -185,11 +185,17 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <CountdownTimer handleTime={handleTime} reset={reset}/>
+                        <CountdownTimer handleTime={handleTime} reset={reset} />
                     </div>
                     <div className="score">
-                        <h3>{stageScores.filter((v:number|null): v is number => v !== null)
-                                .reduce((acc:number, cv:any) => acc + cv, 0)}</h3>
+                        <h3>
+                            {stageScores
+                                .filter(
+                                    (v: number | null): v is number =>
+                                        v !== null
+                                )
+                                .reduce((acc: number, cv: any) => acc + cv, 0)}
+                        </h3>
                     </div>
                 </div>
                 <div className="image-wrapper">

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./GameOver.scss";
 import TopPoly from "./TopPoly.svg";
 import StrokeText from "../stroketext/StrokeText";
+import DOMPurify from "dompurify";
+import Filter from "bad-words";
 interface GameOverProps {
     score: number;
     time: string;
     handleState: () => void;
 }
+
+const filter = new Filter();
 
 const GameOver: React.FC<GameOverProps> = ({ score, time, handleState }) => {
     const [username, setUsername] = useState("");
@@ -14,7 +18,15 @@ const GameOver: React.FC<GameOverProps> = ({ score, time, handleState }) => {
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setUsername(event.target.value);
+        const input = event.target.value;
+        if (input) {
+            // Check if the input is not null or undefined
+            const cleanInput = DOMPurify.sanitize(input);
+            const filteredInput = filter.clean(cleanInput);
+            setUsername(filteredInput);
+        } else {
+            setUsername(""); // Or handle as appropriate for your application
+        }
     };
 
     const handleEnterClick = () => {

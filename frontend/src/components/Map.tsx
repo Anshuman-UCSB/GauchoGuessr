@@ -3,12 +3,12 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { GOOGLE_MAPS_API_KEY } from "../config";
 
 const containerStyle = {
-    width: "100%",
-    height: "100%",
+    width: "110%",
+    height: "110%",
 };
 
 const SbBounds = {
-  //Values approximating the region around UCSB/Isla Vista
+    //Values approximating the region around UCSB/Isla Vista
     se: {
         lat: 34.40421,
         lng: -119.844215,
@@ -36,6 +36,7 @@ const options = {
     streetViewControl: false,
     mapTypeControl: false,
     zoom: 18,
+    disableDefaultUI: true,
     styles: [
         {
             featureType: "poi",
