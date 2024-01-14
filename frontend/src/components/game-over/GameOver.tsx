@@ -5,6 +5,7 @@ import StrokeText from "../stroketext/StrokeText";
 import DOMPurify from "dompurify";
 import Filter from "bad-words";
 import { getPosition, submitLeaderboard } from "../../utils/api";
+import ConfettiExplosion from "react-confetti-explosion";
 interface GameOverProps {
     score: number;
     time: string;
@@ -25,13 +26,27 @@ const GameOver: React.FC<GameOverProps> = ({
     const [position, setPosition] = useState("");
     const [leaderboardState, setLeaderboardState] = useState("unsubmitted");
 
-    useEffect(()=>{
-        const getPos = async ()=>{
+    const [explode, setExplode] = useState(false);
+
+    useEffect(() => {
+        setExplode(true);
+
+        // Optionally reset the explosion after a set duration
+        const timer = setTimeout(() => {
+            setExplode(false);
+        }, 2000); // Adjust the duration to match the confetti animation
+
+        // Cleanup the timer
+        return () => clearTimeout(timer);
+    }, []); // The empty array ensures this effect runs only once on mount
+
+    useEffect(() => {
+        const getPos = async () => {
             const result = await getPosition(score);
             setPosition(result.position);
         };
         getPos();
-    },[]);
+    }, []);
 
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -80,6 +95,14 @@ const GameOver: React.FC<GameOverProps> = ({
     return (
         <div className="game-over">
             <div className="game-over-box">
+                {explode && (
+                    <ConfettiExplosion
+                        force={0.8}
+                        duration={3000}
+                        particleCount={250}
+                        width={1600}
+                    />
+                )}
                 <div className="stats">
                     <img src={TopPoly} alt="" />
                     <h1>{score}</h1>
