@@ -58,8 +58,13 @@ dependencies:
       - googleapis-common-protos==1.62.0
       - grpcio==1.60.0
       - grpcio-status==1.60.0
+      - gunicorn==21.2.0
       - httplib2==0.22.0
+      - imgurpython==1.1.7
+      - inflection==0.5.1
       - msgpack==1.0.7
+      - packaging==23.2
+      - profanityfilter==2.0.6
       - proto-plus==1.23.0
       - protobuf==4.25.2
       - pyasn1==0.5.1
@@ -67,6 +72,7 @@ dependencies:
       - pycparser==2.21
       - pyjwt==2.8.0
       - pyparsing==3.1.1
+      - pyperclip==1.8.2
       - requests==2.31.0
       - rsa==4.9
       - uritemplate==4.1.1
