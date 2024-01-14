@@ -21,6 +21,7 @@ const GameOver: React.FC<GameOverProps> = ({
     gameId,
 }) => {
     const [username, setUsername] = useState("");
+    const [copied, setCopied] = useState(false);
     const [position, setPosition] = useState("");
     const [leaderboardState, setLeaderboardState] = useState("unsubmitted");
 
@@ -44,31 +45,36 @@ const GameOver: React.FC<GameOverProps> = ({
         }
     };
 
-    const handleEnterClick = () => {
-        if (username.length > 0) {
-            if (username.length < 30) {
-                const cleanInput = DOMPurify.sanitize(username);
-                const filteredInput = filter.clean(cleanInput);
-                try {
-                    setLeaderboardState("submitting");
-                    submitLeaderboard(gameId, filteredInput);
-                    setLeaderboardState("submitted");
-
-                } catch (error) {
-                    setLeaderboardState("error");
-                }
-            } else {
-                alert("must be between 1 and 30 characters");
+    const handleEnterClick = async () => {
+        if (username.length > 0 && username.length < 10) {
+            const cleanInput = DOMPurify.sanitize(username);
+            const filteredInput = filter.clean(cleanInput);
+            try {
+                setLeaderboardState("submitting");
+                await submitLeaderboard(gameId, filteredInput);
+                setLeaderboardState("submitted");
+            } catch (error) {
+                setLeaderboardState("error");
+                console.log(leaderboardState, error);
             }
         } else {
-            alert("must be between 1 and 30 characters");
+            alert("Username must be between 1 and 10 characters");
         }
-        // Here you would typically handle the username submission
     };
 
     const handleShareClick = () => {
         // Here you would handle the share functionality
-        console.log("Share button clicked");
+        const shareText = `I just scored ${score} on GauchoGuessr.com!`;
+
+        // Copy the text to the clipboard
+        navigator.clipboard
+            .writeText(shareText)
+            .then(() => {
+                setCopied(true);
+            })
+            .catch((err) => {
+                console.error("Failed to copy text to clipboard", err);
+            });
     };
 
     return (
@@ -92,8 +98,7 @@ const GameOver: React.FC<GameOverProps> = ({
                             onChange={handleUsernameChange}
                         />
                         <div className="wrapper">
-                            {(leaderboardState === "unsubmitted" ||
-                                leaderboardState === "error") && (
+                            {leaderboardState === "unsubmitted" && (
                                 <button onClick={handleEnterClick}>
                                     <StrokeText
                                         text="SUBMIT"
@@ -129,12 +134,46 @@ const GameOver: React.FC<GameOverProps> = ({
                                     />
                                 </div>
                             )}
+                            {leaderboardState === "error" && (
+                                <div className="wrapper-2">
+                                    <button onClick={handleEnterClick}>
+                                        <StrokeText
+                                            text="SUBMIT"
+                                            fontFamily="'Inter', sans-serif"
+                                            color="#fff"
+                                            fontSize="20px"
+                                            fontStyle="italic"
+                                            fontWeight="900"
+                                            lineHeight="20x"
+                                            textAlign="left"
+                                            shadowColor="#000"
+                                            xOffset="0px"
+                                            yOffset="0px"
+                                            webkitTextStroke="5px black"
+                                        />
+                                    </button>
+                                    <StrokeText
+                                        text="Error please try again!"
+                                        fontFamily="'Inter', sans-serif"
+                                        color="#fff"
+                                        fontSize="15px"
+                                        fontStyle="italic"
+                                        fontWeight="900"
+                                        lineHeight="15x"
+                                        textAlign="left"
+                                        shadowColor="#000"
+                                        xOffset="0px"
+                                        yOffset="0px"
+                                        webkitTextStroke="5px black"
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="another-wrapper">
                         <button className="share" onClick={handleShareClick}>
                             <StrokeText
-                                text="SHARE"
+                                text={copied ? "COPIED!" : "SHARE"}
                                 fontFamily="'Inter', sans-serif"
                                 color="#fff"
                                 fontSize="20px"
