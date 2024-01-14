@@ -21,6 +21,7 @@ const GameOver: React.FC<GameOverProps> = ({
     gameId,
 }) => {
     const [username, setUsername] = useState("");
+    const [leaderboardState, setLeaderboardState] = useState("unsubmitted");
 
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -39,8 +40,13 @@ const GameOver: React.FC<GameOverProps> = ({
             if (username.length < 30) {
                 const cleanInput = DOMPurify.sanitize(username);
                 const filteredInput = filter.clean(cleanInput);
-                console.log(gameId, filteredInput);
-                submitLeaderboard(gameId, filteredInput);
+                try {
+                    setLeaderboardState("submitting");
+                    submitLeaderboard(gameId, filteredInput);
+                    setLeaderboardState("submitted");
+                } catch (error) {
+                    setLeaderboardState("error");
+                }
             } else {
                 alert("must be between 1 and 30 characters");
             }
@@ -53,11 +59,6 @@ const GameOver: React.FC<GameOverProps> = ({
     const handleShareClick = () => {
         // Here you would handle the share functionality
         console.log("Share button clicked");
-    };
-
-    const handleHomeClick = () => {
-        // Here you would handle navigation to the home screen
-        console.log("Home button clicked");
     };
 
     return (
@@ -81,22 +82,43 @@ const GameOver: React.FC<GameOverProps> = ({
                             onChange={handleUsernameChange}
                         />
                         <div className="wrapper">
-                            <button onClick={handleEnterClick}>
-                                <StrokeText
-                                    text="ENTER"
-                                    fontFamily="'Inter', sans-serif"
-                                    color="#fff"
-                                    fontSize="20px"
-                                    fontStyle="italic"
-                                    fontWeight="900"
-                                    lineHeight="20x"
-                                    textAlign="left"
-                                    shadowColor="#000"
-                                    xOffset="0px"
-                                    yOffset="0px"
-                                    webkitTextStroke="5px black"
-                                />
-                            </button>
+                            {(leaderboardState === "unsubmitted" ||
+                                leaderboardState === "error") && (
+                                <button onClick={handleEnterClick}>
+                                    <StrokeText
+                                        text="SUBMIT"
+                                        fontFamily="'Inter', sans-serif"
+                                        color="#fff"
+                                        fontSize="20px"
+                                        fontStyle="italic"
+                                        fontWeight="900"
+                                        lineHeight="20x"
+                                        textAlign="left"
+                                        shadowColor="#000"
+                                        xOffset="0px"
+                                        yOffset="0px"
+                                        webkitTextStroke="5px black"
+                                    />
+                                </button>
+                            )}
+                            {leaderboardState === "submitted" && (
+                                <div className="wrapper">
+                                    <StrokeText
+                                        text="SUBMITTED!"
+                                        fontFamily="'Inter', sans-serif"
+                                        color="#fff"
+                                        fontSize="20px"
+                                        fontStyle="italic"
+                                        fontWeight="900"
+                                        lineHeight="25x"
+                                        textAlign="left"
+                                        shadowColor="#000"
+                                        xOffset="0px"
+                                        yOffset="0px"
+                                        webkitTextStroke="5px black"
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="another-wrapper">
