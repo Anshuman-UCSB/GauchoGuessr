@@ -147,5 +147,6 @@ if __name__=="__main__":
 	for l in raw.strip().splitlines():
 		lat,lon,link = map(lambda x: x.strip(), l.split(','))
 		link+='.jpeg'
+		link=link.replace('//img','//i.img')
 		print(lat, lon, link)
 		a.storeImage(link,float(lat), float(lon), "all_jpeg")

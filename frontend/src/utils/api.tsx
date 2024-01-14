@@ -1,7 +1,7 @@
 // apiService.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://ssh.biggergig.com:8000'; // Replace with your API base URL
+const API_BASE_URL = 'https://ssh.biggergig.com:8000'; // Replace with your API base URL
 
 const apiService = axios.create({
   baseURL: API_BASE_URL,

@@ -7,10 +7,14 @@ import json, typing
 import string
 from random import choices
 from starlette.responses import Response
+import ssl
+
 
 # Run with: uvicorn main:app --reload 
 # or just call this file
 app = FastAPI()
+# ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+# ssl_context.load_cert_chain('/home/biggergig/.ssl/cert.pem', keyfile='/home/biggergig/.ssl/key.pem')
 
 origins = [
     "http://localhost:3000",
@@ -81,4 +85,10 @@ def getLink(gameid: str, stage:int, res: Response):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", reload=True)
+    uvicorn.run(
+       "main:app",
+       host="0.0.0.0",
+       reload=True,
+       ssl_keyfile="./cert.key",
+       ssl_certfile="./cert.crt",
+       )

@@ -47,7 +47,7 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
         }
     };
 
-    fetchData();
+        fetchData();
     }, []);
 
     // Function to determine font size based on screen width
