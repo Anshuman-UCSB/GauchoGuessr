@@ -69,7 +69,12 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
-            submitGuess(time, curLat, curLng, gameId, gameCount);
+            const guess = async ()=>{
+                const result = await submitGuess(time, curLat, curLng, gameId, gameCount);
+                setStageScores(result.scores);
+                setStageTimes(result.times);
+            }
+            guess();
             setReset(true);
         } else {
             //console.log("submitted! time:" + time + " lat:" + curLat + " lng:" + curLng + " gameId:" + gameId + " gameCount:" + gameCount);
@@ -125,7 +130,12 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Menu handleState={handleState} toggleMenu={toggleMenu} />
             )}
             {isGameOverVisible && (
-                <GameOver score={51728} time="7:37" handleState={handleState} />
+                <GameOver score={stageScores
+                                .filter(
+                                    (v: number | null): v is number =>
+                                        v !== null
+                                )
+                                .reduce((acc: number, cv: any) => acc + cv, 0)} time="7:37" handleState={handleState} />
             )}
             <div className="logo">
                 <img src={Left} alt="" />
