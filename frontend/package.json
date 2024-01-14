@@ -47,5 +47,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/bad-words": "^3.0.3",
+    "@types/dompurify": "^3.0.5",
+    "bad-words": "^3.0.4",
+    "dompurify": "^3.0.8"
   }
 }

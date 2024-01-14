@@ -78,13 +78,13 @@ def getData(gameid: str, stage:int, res: Response):
         return "Game doesn't exist"
     else:
         game = games[gameid]
-        return {"link":game.getLink(stage), "scores":game.stageScores, "times":game.stageTimes}
+        return {"link":game.getLink(stage), "scores":game.stageScores, "times":game.stageTimes,"realCoords":{"lat":game.stages[stage]['lat'],"lng":game.stages[stage]['lon']}}
 
 @app.post("/game/{gameid}/", status_code=200, response_class=PrettyJSONResponse)
 def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response):
     game = games[gameid]
     game.guess(time, lat, lon, stage)
-    return {"realCoords":{"lat":game[stage]['lat'],"lon":game[stage]['lon']}}
+    return {"scores":game.stageScores, "times":game.stageTimes}
 
 
 if __name__ == "__main__":

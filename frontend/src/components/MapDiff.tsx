@@ -8,8 +8,8 @@ import {
 import { GOOGLE_MAPS_API_KEY } from "../config";
 
 const containerStyle = {
-    width: "100%",
-    height: "100%",
+    width: "110%",
+    height: "110%",
 };
 
 const options = {

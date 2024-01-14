@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import {getData, registerGame, submitGuess } from "../../utils/api";
+import { getData, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
@@ -68,7 +68,12 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
-            submitGuess(time, curLat, curLng, gameId, gameCount);
+            const guess = async ()=>{
+                const result = await submitGuess(time, curLat, curLng, gameId, gameCount);
+                setStageScores(result.scores);
+                setStageTimes(result.times);
+            }
+            guess();
             setReset(true);
         } else {
             setReset(false);
@@ -102,6 +107,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setImg(result.link);
             setStageScores(result.scores);
             setStageTimes(result.times);
+            setRealCoords(result.realCoords);
         };
         if (gameId !== "invalid" && gameCount % 2 === 0 && gameCount <= 8) {
             console.log("Calling getImg with gameId", gameId);
@@ -121,7 +127,12 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Menu handleState={handleState} toggleMenu={toggleMenu} />
             )}
             {isGameOverVisible && (
-                <GameOver score={51728} time="7:37" handleState={handleState} />
+                <GameOver score={stageScores
+                                .filter(
+                                    (v: number | null): v is number =>
+                                        v !== null
+                                )
+                                .reduce((acc: number, cv: any) => acc + cv, 0)} time="7:37" handleState={handleState} />
             )}
             <div className="logo">
                 <img src={Left} alt="" />
@@ -181,10 +192,17 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <CountdownTimer handleTime={handleTime} reset={reset}/>
+                        <CountdownTimer handleTime={handleTime} reset={reset} />
                     </div>
                     <div className="score">
-                        <h3>31,415</h3>
+                        <h3>
+                            {stageScores
+                                .filter(
+                                    (v: number | null): v is number =>
+                                        v !== null
+                                )
+                                .reduce((acc: number, cv: any) => acc + cv, 0)}
+                        </h3>
                     </div>
                 </div>
                 <div className="image-wrapper">
@@ -207,7 +225,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         {gameCount % 2 === 1 && (
                             <DiffMap
                                 UserMarker={{ lat: curLat, lng: curLng }}
-                                realMarker={tmpRealCoords}
+                                realMarker={realCoords}
                                 distance={0}
                             />
                         )}

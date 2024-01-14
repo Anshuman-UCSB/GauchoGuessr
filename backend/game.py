@@ -9,10 +9,17 @@ class Game:
 		self.stageTimes = [None]*size
 	def getLink(self, stage):
 		return self.stages[stage]['img']
+	def calcScore(self, dx, dy, time):
+		l2 = (dx**2 + dy**2)**.5 * 1000
+		return 100/(l2**.5)
+
 	def guess(self, time, lat, lon, stage):
 		rlat = self.stages[stage]['lat']
 		rlon = self.stages[stage]['lon']
-		print(self.stages[stage])
-		self.stageScores[stage] = 1
+		score = self.calcScore(rlat-lat, rlon-lon, time)
+		if self.stageScores[stage] == None:
+			self.stageScores[stage] = score
+		else:
+			print("something fishy is going on...")
 		self.stageTimes[stage] = time
 		self.score=sum([v for v in self.stageScores if v is not None])
