@@ -10,12 +10,17 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 import "./Gamepage.scss";
 import Pano from "../../components/Pano";
 import MyMap from "../../components/Map";
+import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
 import { getLink, registerGame } from "../../utils/api";
 
 type GamepageProps = {
     handleState: () => void;
+};
+const tmpRealCoords = {
+    lat: 34.4140,
+    lng: -119.8489,
 };
 
 const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
@@ -161,7 +166,8 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         <Pano key={img} width="100%" height="100%" src={img} title="" />
                     </div>
                     <div className={gameCount % 2 === 0 ? "map" : "map large"}>
-                        <MyMap handleLat={handleLat} handleLng={handleLng} />
+                        {gameCount % 2 === 0 && <MyMap handleLat={handleLat} handleLng={handleLng} />}
+                        {gameCount % 2 === 1 && <DiffMap UserMarker={{lat: curLat, lng: curLng}} realMarker={tmpRealCoords} distance={0}/>}
                     </div>
                 </div>
             </div>
