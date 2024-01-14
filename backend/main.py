@@ -17,10 +17,7 @@ app = FastAPI()
 # ssl_context.load_cert_chain('/home/biggergig/.ssl/cert.pem', keyfile='/home/biggergig/.ssl/key.pem')
 
 origins = [
-    "http://localhost:3000",
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://127.0.0.1:3000",
+    "*"
 ]
 app.add_middleware(
     CORSMiddleware,
