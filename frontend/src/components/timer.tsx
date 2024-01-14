@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-const CountdownTimer = () => {
+type timerProps = {
+    handleTime: (time: number) => void;
+}
+
+const CountdownTimer: React.FC<timerProps> = ({handleTime}) => {
   const [seconds, setSeconds] = useState(0); // 5 minutes in seconds
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => prevSeconds + 1);
+      handleTime(seconds);
     }, 1000);
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
