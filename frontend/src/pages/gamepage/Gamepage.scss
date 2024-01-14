@@ -112,9 +112,19 @@
                 border: 5px solid #000;
                 overflow: hidden;
             }
-            .large {
-                width: 80vw !important;
-                height: 80vw !important;
+            .map-large {
+                width: 80vw;
+                height: 80vw;
+                max-width: 600px;
+                max-height: 600px;
+                border-radius: 80vw;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                box-shadow: -4px 4px 0px 0px #000;
+                border: 5px solid #000;
+                overflow: hidden;
             }
         }
     }
@@ -276,8 +286,18 @@
                 border-radius: 10px !important;
             }
             .large {
-                width: 80vw !important;
-                height: 80vw !important;
+                width: 80vw;
+                height: 80vw;
+                max-width: 600px;
+                max-height: 600px;
+                border-radius: 80vw;
+                top: calc(50% + 200px);
+                left: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                box-shadow: -4px 4px 0px 0px #000;
+                border: 5px solid #000;
+                overflow: hidden;
             }
         }
         .progress-bar {

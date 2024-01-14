@@ -157,7 +157,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                     <div className="image">
                         <Pano width="100%" height="100%" src={img} title="" />
                     </div>
-                    <div className={gameCount % 2 === 0 ? "map" : "map large"}>
+                    <div className={gameCount % 2 === 0 ? "map" : "map-large"}>
                         <MyMap handleLat={handleLat} handleLng={handleLng} />
                     </div>
                 </div>
