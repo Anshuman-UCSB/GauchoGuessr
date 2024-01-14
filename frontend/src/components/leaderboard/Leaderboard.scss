@@ -20,14 +20,37 @@
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        .user-score {
-            span {
+        width: 100%;
+        .user-list {
+            width: 70%;
+            .user-score {
                 color: #000;
                 font-family: Inter;
                 font-size: 24px;
                 font-style: italic;
                 font-weight: 900;
                 line-height: 30px; /* 178.571% */
+                .wrapper {
+                    justify-content: space-between;
+                    display: flex;
+                    flex-direction: row;
+                    .username {
+                        color: #000;
+                        font-family: Inter;
+                        font-size: 24px;
+                        font-style: italic;
+                        font-weight: 900;
+                        line-height: 30px; /* 178.571% */
+                    }
+                    .score {
+                        color: #000;
+                        font-family: Inter;
+                        font-size: 24px;
+                        font-style: italic;
+                        font-weight: 900;
+                        line-height: 30px; /* 178.571% */
+                    }
+                }
             }
         }
     }
@@ -55,10 +78,20 @@
         box-sizing: border-box;
         min-width: 400px;
         .leaderboard-container {
-            .user-score {
-                span {
-                    font-size: 22px;
-                    line-height: 24px;
+            .user-list {
+                font-size: 22px !important;
+                line-height: 24px; /* 178.571% */
+                .user-score {
+                    .wrapper {
+                        .username {
+                            font-size: 22px !important;
+                            line-height: 24px; /* 178.571% */
+                        }
+                        .score {
+                            font-size: 22px;
+                            line-height: 24px; /* 178.571% */
+                        }
+                    }
                 }
             }
         }
@@ -71,10 +104,20 @@
         box-sizing: border-box;
         min-width: 350px;
         .leaderboard-container {
-            .user-score {
-                span {
-                    font-size: 16px;
-                    line-height: 20px;
+            .user-list {
+                .user-score {
+                    font-size: 18px;
+                    line-height: 20px; /* 178.571% */
+                    .wrapper {
+                        .username {
+                            font-size: 18px !important;
+                            line-height: 20px; /* 178.571% */
+                        }
+                        .score {
+                            font-size: 18px;
+                            line-height: 20px; /* 178.571% */
+                        }
+                    }
                 }
             }
         }

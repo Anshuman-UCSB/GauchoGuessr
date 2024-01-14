@@ -37,7 +37,7 @@ const GameOver: React.FC<GameOverProps> = ({
     };
 
     const handleEnterClick = async () => {
-        if (username.length > 0 && username.length < 30) {
+        if (username.length > 0 && username.length < 10) {
             const cleanInput = DOMPurify.sanitize(username);
             const filteredInput = filter.clean(cleanInput);
             try {
@@ -49,7 +49,7 @@ const GameOver: React.FC<GameOverProps> = ({
                 console.log(leaderboardState, error);
             }
         } else {
-            alert("Username must be between 1 and 30 characters");
+            alert("Username must be between 1 and 10 characters");
         }
     };
 
