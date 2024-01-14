@@ -119,7 +119,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         <Pano
                             width="100%"
                             height="100%"
-                            src={"https://i.imgur.com/xlic0gy.jpg"}
+                            src={"https://i.imgur.com/Gf4lcXo.jpeg"}
                             title=""
                         />
                     </div>
