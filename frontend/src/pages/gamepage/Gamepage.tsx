@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import { getData, registerGame } from "../../utils/api";
+import { getData, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
@@ -33,10 +33,22 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [gameCount, setGameCount] = useState(0);
     const [time, setTime] = useState(0);
 
-    const [gameId, setGameId] = useState(null);
+    const [gameId, setGameId] = useState("invalid");
     const [img, setImg] = useState("");
-    const [stageScores, setStageScores] = useState([null,null,null,null,null]);
-    const [stageTimes, setStageTimes] = useState([null,null,null,null,null]);
+    const [stageScores, setStageScores] = useState([
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
+    const [stageTimes, setStageTimes] = useState([
+        null,
+        null,
+        null,
+        null,
+        null,
+    ]);
 
     const handleLat = (lat: number) => {
         setCurLat(lat);
@@ -52,6 +64,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
+            submitGuess(time, curLat, curLng, gameId, gameCount);
             console.log("submitted!");
         } else {
         }
@@ -85,11 +98,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
             setStageScores(result.scores);
             setStageTimes(result.times);
         };
-        if (gameId !== null && gameCount % 2 === 0 && gameCount <=8) {
+        if (gameId !== "invalid" && gameCount % 2 === 0 && gameCount <= 8) {
             console.log("Calling getImg with gameId", gameId);
             getImg();
         }
-
     }, [gameId, gameCount]);
 
     const toggleMenu = () => {
@@ -164,7 +176,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         alt="Timer"
                     />
                     <div className="time">
-                        <CountdownTimer handleTime={handleTime}/>
+                        <CountdownTimer handleTime={handleTime} />
                     </div>
                     <div className="score">
                         <h3>31,415</h3>
@@ -198,11 +210,33 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 </div>
             </div>
             <div className="progress-bar">
-                <Progress index={1} score={stageScores[0]} time={stageTimes[0]} position="start"></Progress>
-                <Progress index={2} score={stageScores[1]} time={stageTimes[1]}></Progress>
-                <Progress index={3} score={stageScores[2]} time={stageTimes[2]}></Progress>
-                <Progress index={4} score={stageScores[3]} time={stageTimes[3]}></Progress>
-                <Progress index={5} score={stageScores[4]} time={stageTimes[4]} position="end"></Progress>
+                <Progress
+                    index={1}
+                    score={stageScores[0]}
+                    time={stageTimes[0]}
+                    position="start"
+                ></Progress>
+                <Progress
+                    index={2}
+                    score={stageScores[1]}
+                    time={stageTimes[1]}
+                ></Progress>
+                <Progress
+                    index={3}
+                    score={stageScores[2]}
+                    time={stageTimes[2]}
+                ></Progress>
+                <Progress
+                    index={4}
+                    score={stageScores[3]}
+                    time={stageTimes[3]}
+                ></Progress>
+                <Progress
+                    index={5}
+                    score={stageScores[4]}
+                    time={stageTimes[4]}
+                    position="end"
+                ></Progress>
             </div>
             <div className="submit-wrapper">
                 {gameCount % 2 === 0 ? (
