@@ -17,8 +17,8 @@ type HomepageProps = {
 
 const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [usersScores, setUsersScores]=useState<UserScore[]>([]);
-    const [error, setError] = useState<Error|null>(null);
+    const [usersScores, setUsersScores] = useState<UserScore[]>([]);
+    const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     // TODO: use error/loading for conditional rendering
 
@@ -35,17 +35,17 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-        setIsLoading(true);
+            setIsLoading(true);
 
-        try {
-            const result = await getLeaderboard();
-            setUsersScores(result);
-        } catch (error:any) {
-            setError(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+            try {
+                const result = await getLeaderboard();
+                setUsersScores(result);
+            } catch (error: any) {
+                setError(error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
         fetchData();
     }, []);
@@ -97,8 +97,8 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
                         />
                     </button>
                     <p>
-                        How well do you know UCSB’s campus? Guess your location
-                        to earn points, and see if you can top the leaderboard!
+                        How well do you know UCSB? Guess your location to earn
+                        points, and see if you can top the leaderboard!
                     </p>
                 </div>
                 <div className="leaderboard">
