@@ -41,7 +41,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         setCurLng(lng);
     };
     const progressGame = () => {
-        if (gameCount >= 8) {
+        if (gameCount >= 9) {
             setIsGameOverVisible(true);
         }
         if (gameCount % 2 === 0) {
@@ -73,11 +73,11 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
 
     useEffect(() => {
         const getImg = async () => {
-            const result = await getLink(gameId, Math.floor(gameCount/2));
+            const result = await getLink(gameId, Math.floor(gameCount / 2));
             setImg(result);
         };
-        if(gameId !== null){
-            console.log("Calling getImg with gameId",gameId);
+        if (gameId !== null) {
+            console.log("Calling getImg with gameId", gameId);
             getImg();
         }
     }, [gameId, gameCount]);
@@ -162,7 +162,13 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 </div>
                 <div className="image-wrapper">
                     <div className="image">
-                        <Pano key={img} width="100%" height="100%" src={img} title="" />
+                        <Pano
+                            key={img}
+                            width="100%"
+                            height="100%"
+                            src={img}
+                            title=""
+                        />
                     </div>
                     <div className={gameCount % 2 === 0 ? "map" : "map-large"}>
                         {gameCount % 2 === 0 && (
@@ -192,7 +198,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 {gameCount % 2 === 0 ? (
                     <button onClick={progressGame}>
                         <StrokeText
-                            text="SUBMIT"
+                            text="GUESS"
                             fontFamily="'Inter', sans-serif"
                             color="#fff"
                             fontSize="25px"
