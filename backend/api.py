@@ -4,6 +4,7 @@ from firebase_admin import firestore
 import threading
 from google.cloud.firestore_v1.base_query import FieldFilter
 import time
+import bisect
 # Application Default credentials are automatically created.
 
 class Api:
@@ -59,11 +60,26 @@ class Api:
 			return None
 		return self.data[name]
 	
+
+	def getPotentialPosition(self, score):
+		def translate(pos):
+			pos+=1
+			if pos == 1:
+				return "1st!"
+			if pos == 2:
+				return "2nd"
+			if pos == 3:
+				return "3rd"
+			return f"{pos}th"
+
+		# print([d['score'] for d in self.data['default']], score)
+		return {"position":translate(bisect.bisect([-d['score'] for d in self.data['default']], -score))}
+
 	def setScore(self, leaderboard, name, score):
 		if leaderboard in self.data or self.registerLeaderboard(name):
 			lb_col = self.db.collection("leaderboards").document(leaderboard).collection("leaderboard")
 			lb_col.add({"name":name, "score":score, "time":firestore.SERVER_TIMESTAMP})
-			return "success"
+			return {"position":bisect.bisect([d['score'] for d in self.data['default']], score)}
 		else:
 			return "error: invalid leaderboard"
 

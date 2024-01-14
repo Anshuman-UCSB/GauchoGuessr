@@ -1,8 +1,10 @@
 from api import Api
+import time
 
 class Game:
 	def __init__(self, size = 5):
 		self.a = Api()
+		self.timestamp = time.time()
 		self.stages = self.a.getImages(size)
 		self.score = 0
 		self.stageScores = [None]*size

@@ -97,8 +97,8 @@ const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
                         />
                     </button>
                     <p>
-                        How well do you know UCSB? Guess your location to earn
-                        points, and see if you can top the leaderboard!
+                        How well do you know UCSB? Guess your location
+                        to earn points, and see if you can top the leaderboard!
                     </p>
                 </div>
                 <div className="leaderboard">
