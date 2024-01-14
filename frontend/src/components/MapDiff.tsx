@@ -16,7 +16,6 @@ const options = {
     streetViewControl: false,
     mapTypeControl: false,
     zoom: 20,
-    draggable: false,
     styles: [
         {
             featureType: "poi",

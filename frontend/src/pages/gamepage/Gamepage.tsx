@@ -13,7 +13,7 @@ import MyMap from "../../components/Map";
 import DiffMap from "../../components/MapDiff";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
-import { getLink, getData, registerGame, submitGuess } from "../../utils/api";
+import { getData, registerGame, submitGuess } from "../../utils/api";
 import CountdownTimer from "../../components/timer";
 
 type GamepageProps = {
