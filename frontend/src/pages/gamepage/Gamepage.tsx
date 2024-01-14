@@ -30,11 +30,18 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [stage, setStage] = useState(0);
     const [img, setImg] = useState("");
 
+    const handleLat = (lat: number) => {
+        setCurLat(lat);
+    }
+    const handleLng = (lng: number) => {
+        setCurLng(lng);
+    }
     const progressGame = () => {
         if (gameCount % 2 === 0) {
         } else {
         }
         setGameCount(gameCount + 1);
+        console.log(curLat, curLng);
     };
 
     useEffect(() => {
@@ -147,7 +154,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         <Pano width="100%" height="100%" src={img} title="" />
                     </div>
                     <div className="map">
-                        <MyMap />
+                        <MyMap handleLat={handleLat} handleLng={handleLng} />
                     </div>
                 </div>
             </div>
