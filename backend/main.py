@@ -72,18 +72,19 @@ def createGame(res: Response):
     return {"gameid":gameid}
 
 @app.get("/game/{gameid}/", status_code=200, response_class=PrettyJSONResponse)
-def getLink(gameid: str, stage:int, res: Response):
+def getData(gameid: str, stage:int, res: Response):
     if gameid not in games:
         res.status_code = 404
         return "Game doesn't exist"
     else:
-        return {"link":games[gameid].getLink(stage)}
+        game = games[gameid]
+        return {"link":game.getLink(stage), "scores":game.stageScores, "times":game.stageTimes}
 
 @app.post("/game/{gameid}/", status_code=200, response_class=PrettyJSONResponse)
 def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response):
     game = games[gameid]
     game.guess(time, lat, lon, stage)
-    return {"total":game.score, "0":game.stageScores[0], "1":game.stageScores[1], "2":game.stageScores[2], "3":game.stageScores[3], "4":game.stageScores[4]}
+    return {"realCoords":{"lat":game[stage]['lat'],"lon":game[stage]['lon']}}
 
 
 if __name__ == "__main__":
