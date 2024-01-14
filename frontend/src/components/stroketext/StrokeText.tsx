@@ -70,15 +70,15 @@ const StrokeText: React.FC<StrokeTextProps> = ({
             }}
         >
             {/* Shadow text */}
-            <div className="text-shadow" style={shadowStyles}>
+            <div className="stroke-text text-shadow" style={shadowStyles}>
                 {text}
             </div>
             {/* Stroked text */}
-            <div className="text-stroke" style={strokeStyles}>
+            <div className="stroke-text text-stroke" style={strokeStyles}>
                 {text}
             </div>
             {/* Regular text */}
-            <div className="text" style={textStyles}>
+            <div className="stroke-text text" style={textStyles}>
                 {text}
             </div>
         </div>

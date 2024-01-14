@@ -35,6 +35,27 @@
     }
 }
 
+@media (max-width: 1060px) {
+    .prog-rect {
+        width: 100px;
+    }
+}
+
+@media (max-width: 817px) {
+    .prog-rect {
+        width: calc((100vw - 71px) / 5);
+        height: 38px;
+        .text-wrapper {
+            h2 {
+                font-size: 3.2vw;
+            }
+            h3 {
+                font-size: 2.2vw;
+            }
+        }
+    }
+}
+
 .index-1 {
     background-image: linear-gradient(180deg, #ff7474 0%, #ff3a3a 100%);
 }

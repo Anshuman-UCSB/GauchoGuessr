@@ -91,10 +91,11 @@
             top: 0;
             border-radius: 16px;
             .image {
-                background-color: rgb(179, 69, 69);
+                background-color: rgb(0, 0, 0);
                 height: 100%;
                 width: 100%;
                 border-radius: 16px;
+                overflow: hidden;
             }
             .map {
                 background-color: white;
@@ -102,10 +103,11 @@
                 right: 20px;
                 bottom: 20px;
                 width: 300px;
-                height: 400px;
+                height: 300px;
                 border-radius: 40px;
                 box-shadow: -4px 4px 0px 0px #000;
                 border: 5px solid #000;
+                overflow: hidden;
             }
         }
     }
@@ -117,6 +119,160 @@
     }
     .submit-wrapper {
         button {
+            width: 150px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 50px;
+            bottom: 20px;
+            border-radius: 50px;
+            border: 5px solid #000;
+            background: linear-gradient(180deg, #ffb800 0%, #ffdf8c 100%);
+            box-shadow: -4px 4px 0px 0px #000;
+        }
+    }
+}
+
+@media (max-width: 1060px) {
+    .gamepage-wrapper {
+        .logo {
+            img {
+                width: 225px;
+            }
+            .logo-text {
+                top: 10px;
+                width: 100px;
+                .stroke-text {
+                    font-size: 20px !important;
+                    line-height: 20px !important;
+                }
+            }
+        }
+        .menu-button {
+            img {
+                width: 225px;
+            }
+            .icon {
+                right: 80px;
+                top: 12px;
+                svg {
+                    height: 35px !important;
+                }
+            }
+        }
+        .game {
+            .timer {
+                top: -59px;
+                height: 90px;
+                img {
+                    width: 300px;
+                }
+                .time {
+                    top: 23%;
+                    h2 {
+                        font-size: 26px;
+                    }
+                }
+                .score {
+                    top: 45%;
+                    h3 {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 817px) {
+    .gamepage-wrapper {
+        .logo {
+            img {
+                display: none;
+            }
+            .logo-text {
+                top: 10px;
+                width: 100px;
+                .stroke-text {
+                    font-size: 20px !important;
+                    line-height: 20px !important;
+                }
+            }
+        }
+        .menu-button {
+            img {
+                display: none;
+            }
+            .icon {
+                right: 80px;
+                top: 12px;
+                svg {
+                    height: 30px !important;
+                }
+            }
+        }
+        .game {
+            width: calc(100vw - 20px);
+            height: calc(100vh - 200px);
+            .timer {
+                top: -40px;
+                height: 90px;
+                img {
+                    width: 200px;
+                }
+                .time {
+                    top: 14%;
+                    h2 {
+                        font-size: 18px;
+                    }
+                }
+                .score {
+                    top: 30%;
+                    h3 {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        .image-wrapper {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 16px;
+            .image {
+                background-color: rgb(0, 0, 0);
+                height: 100%;
+                width: 100%;
+                border-radius: 16px;
+                overflow: hidden;
+            }
+            .map {
+                width: 40vw !important;
+                height: 40vw !important;
+                right: 10px !important;
+                bottom: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+        .progress-bar {
+            left: 10px;
+            bottom: 58px;
+        }
+        .submit-wrapper {
+            button {
+                width: 140px;
+                height: 35px;
+                right: 50%;
+                transform: translate(50%, 0%);
+                bottom: 15px;
+                .stroke-text {
+                    font-size: 20px !important;
+                }
+            }
         }
     }
 }

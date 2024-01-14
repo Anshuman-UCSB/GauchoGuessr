@@ -8,6 +8,10 @@ type UserScore = {
     score: number;
 };
 
+type HomepageProps = {
+    handleState: () => void;
+};
+
 const usersScores: UserScore[] = [
     { username: "User123", score: 45678 },
     { username: "JohnDoe456", score: 37890 },
@@ -39,7 +43,7 @@ const usersScores: UserScore[] = [
     { username: "WebDesignPro222", score: 59876 },
 ];
 
-export default function Homepage() {
+const Homepage: React.FC<HomepageProps> = ({ handleState }) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -83,7 +87,7 @@ export default function Homepage() {
                             webkitTextStroke="10px black"
                         />
                     </div>
-                    <button>
+                    <button onClick={handleState}>
                         <StrokeText
                             text="START!"
                             fontFamily="'Inter', sans-serif"
@@ -110,4 +114,6 @@ export default function Homepage() {
             </div>
         </div>
     );
-}
+};
+
+export default Homepage;

@@ -7,6 +7,9 @@ import StrokeText from "../../components/stroketext/StrokeText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import "./Gamepage.scss";
+import Pano from "../../components/Pano";
+import MyMap from "../../components/Map";
+import DiffMap from "../../components/MapDiff";
 
 export default function Gamepage() {
     return (
@@ -55,8 +58,17 @@ export default function Gamepage() {
                     </div>
                 </div>
                 <div className="image-wrapper">
-                    <div className="image"></div>
-                    <div className="map"></div>
+                    <div className="image">
+                        <Pano
+                            width="100%"
+                            height="100%"
+                            src={"https://i.imgur.com/xlic0gy.jpg"}
+                            title=""
+                        />
+                    </div>
+                    <div className="map">
+                        <MyMap />
+                    </div>
                 </div>
             </div>
             <div className="progress-bar">
@@ -67,7 +79,22 @@ export default function Gamepage() {
                 <Progress index={5} position="end"></Progress>
             </div>
             <div className="submit-wrapper">
-                <button></button>
+                <button>
+                    <StrokeText
+                        text="SUBMIT"
+                        fontFamily="'Inter', sans-serif"
+                        color="#fff"
+                        fontSize="25px"
+                        fontStyle="italic"
+                        fontWeight="900"
+                        lineHeight="25px"
+                        textAlign="left"
+                        shadowColor="#000"
+                        xOffset="0px"
+                        yOffset="0px"
+                        webkitTextStroke="5px black"
+                    />
+                </button>
             </div>
         </div>
     );
