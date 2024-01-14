@@ -8,6 +8,8 @@ import string
 from random import choices
 from starlette.responses import Response
 import ssl
+from profanityfilter import ProfanityFilter
+pf = ProfanityFilter()
 
 
 # Run with: uvicorn main:app --reload 
@@ -89,8 +91,16 @@ def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response)
 @app.post("/game/{gameid}/submit", status_code=200, response_class=PrettyJSONResponse)
 def guess(gameid: str, name:str, res: Response):
     game = games[gameid]
+    old = name
+    print("censoring",name)
+    name = pf.censor(name)
+    if old != name:
+        print("Censored",old,"to",name)
     return api.setScore("default", name, game.score)
 
+@app.get("/leaderboard", status_code=200, response_class=PrettyJSONResponse)
+def getPos(score:int, res: Response):
+    return api.getPotentialPosition(score)
 
 if __name__ == "__main__":
     import uvicorn

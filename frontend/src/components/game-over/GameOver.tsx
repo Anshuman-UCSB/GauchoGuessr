@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./GameOver.scss";
 import TopPoly from "./TopPoly.svg";
 import StrokeText from "../stroketext/StrokeText";
 import DOMPurify from "dompurify";
 import Filter from "bad-words";
-import { submitLeaderboard } from "../../utils/api";
+import { getPosition, submitLeaderboard } from "../../utils/api";
 interface GameOverProps {
     score: number;
     time: string;
@@ -21,7 +21,16 @@ const GameOver: React.FC<GameOverProps> = ({
     gameId,
 }) => {
     const [username, setUsername] = useState("");
+    const [position, setPosition] = useState("");
     const [leaderboardState, setLeaderboardState] = useState("unsubmitted");
+
+    useEffect(()=>{
+        const getPos = async ()=>{
+            const result = await getPosition(score);
+            setPosition(result.position);
+        };
+        getPos();
+    },[]);
 
     const handleUsernameChange = (
         event: React.ChangeEvent<HTMLInputElement>
@@ -44,6 +53,7 @@ const GameOver: React.FC<GameOverProps> = ({
                     setLeaderboardState("submitting");
                     submitLeaderboard(gameId, filteredInput);
                     setLeaderboardState("submitted");
+
                 } catch (error) {
                     setLeaderboardState("error");
                 }
@@ -68,7 +78,7 @@ const GameOver: React.FC<GameOverProps> = ({
                     <img src={TopPoly} alt="" />
                     <h1>{score}</h1>
                     <div className="sub-stats">
-                        <h2>7th</h2>
+                        <h2>{position}</h2>
                         <h2>{time}</h2>
                     </div>
                 </div>

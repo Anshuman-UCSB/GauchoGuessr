@@ -38,6 +38,17 @@ export const getLeaderboard = async () => {
 	}
 }
 
+export const getPosition = async (score:number) => {
+	try {
+		console.log("Sending request");
+		const response = await apiService.get(`/leaderboard?score=${score}`);
+		console.log("recieved",response);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+}
+
 export const submitLeaderboard = async (gameid:string, name:string) => {
 	try {
 		console.log("Sending request");
