@@ -35,25 +35,21 @@ const GameOver: React.FC<GameOverProps> = ({
         }
     };
 
-    const handleEnterClick = () => {
-        if (username.length > 0) {
-            if (username.length < 30) {
-                const cleanInput = DOMPurify.sanitize(username);
-                const filteredInput = filter.clean(cleanInput);
-                try {
-                    setLeaderboardState("submitting");
-                    submitLeaderboard(gameId, filteredInput);
-                    setLeaderboardState("submitted");
-                } catch (error) {
-                    setLeaderboardState("error");
-                }
-            } else {
-                alert("must be between 1 and 30 characters");
+    const handleEnterClick = async () => {
+        if (username.length > 0 && username.length < 30) {
+            const cleanInput = DOMPurify.sanitize(username);
+            const filteredInput = filter.clean(cleanInput);
+            try {
+                setLeaderboardState("submitting");
+                await submitLeaderboard(gameId, filteredInput);
+                setLeaderboardState("submitted");
+            } catch (error) {
+                setLeaderboardState("error");
+                console.log(leaderboardState, error);
             }
         } else {
-            alert("must be between 1 and 30 characters");
+            alert("Username must be between 1 and 30 characters");
         }
-        // Here you would typically handle the username submission
     };
 
     const handleShareClick = () => {
@@ -82,8 +78,7 @@ const GameOver: React.FC<GameOverProps> = ({
                             onChange={handleUsernameChange}
                         />
                         <div className="wrapper">
-                            {(leaderboardState === "unsubmitted" ||
-                                leaderboardState === "error") && (
+                            {leaderboardState === "unsubmitted" && (
                                 <button onClick={handleEnterClick}>
                                     <StrokeText
                                         text="SUBMIT"
@@ -111,6 +106,40 @@ const GameOver: React.FC<GameOverProps> = ({
                                         fontStyle="italic"
                                         fontWeight="900"
                                         lineHeight="25x"
+                                        textAlign="left"
+                                        shadowColor="#000"
+                                        xOffset="0px"
+                                        yOffset="0px"
+                                        webkitTextStroke="5px black"
+                                    />
+                                </div>
+                            )}
+                            {leaderboardState === "error" && (
+                                <div className="wrapper-2">
+                                    <button onClick={handleEnterClick}>
+                                        <StrokeText
+                                            text="SUBMIT"
+                                            fontFamily="'Inter', sans-serif"
+                                            color="#fff"
+                                            fontSize="20px"
+                                            fontStyle="italic"
+                                            fontWeight="900"
+                                            lineHeight="20x"
+                                            textAlign="left"
+                                            shadowColor="#000"
+                                            xOffset="0px"
+                                            yOffset="0px"
+                                            webkitTextStroke="5px black"
+                                        />
+                                    </button>
+                                    <StrokeText
+                                        text="Error please try again!"
+                                        fontFamily="'Inter', sans-serif"
+                                        color="#fff"
+                                        fontSize="15px"
+                                        fontStyle="italic"
+                                        fontWeight="900"
+                                        lineHeight="15x"
                                         textAlign="left"
                                         shadowColor="#000"
                                         xOffset="0px"
