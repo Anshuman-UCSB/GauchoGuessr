@@ -18,7 +18,7 @@ export default function Leaderboard({ usersScores }: LeaderboardProps) {
         const currentLength = name.length + score.toString().length;
         return ".".repeat(maxLength - currentLength);
     };
-
+    // TODO: leaderboard connected to API
     return (
         <div className="leaderboard-container">
             <StrokeText

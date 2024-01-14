@@ -12,6 +12,7 @@ import Pano from "../../components/Pano";
 import MyMap from "../../components/Map";
 import Menu from "../../components/menu/Menu";
 import GameOver from "../../components/game-over/GameOver";
+import { getLink, registerGame } from "../../utils/api";
 
 type GamepageProps = {
     handleState: () => void;
@@ -21,6 +22,10 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isGameOverVisible, setIsGameOverVisible] = useState(false);
+    
+    const [gameId, setGameId] = useState(null);
+    const [stage, setStage] = useState(0);
+    const [img, setImg] = useState("");
 
     useEffect(() => {
         function handleResize() {
@@ -31,10 +36,23 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
 
         // Call handler right away so state gets updated with initial window size
         handleResize();
+        const setupGame = async () => {
+            const result = await registerGame();
+            setGameId(result);
+        }
+        setupGame();
 
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+    useEffect(() => {
+        const getImg = async () => {
+            const result = await getLink(gameId, stage);
+            setImg(result);
+        }
+        gameId || getImg();
+    }, [gameId]);
 
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);
@@ -119,7 +137,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                         <Pano
                             width="100%"
                             height="100%"
-                            src={"https://i.imgur.com/Gf4lcXo.jpeg"}
+                            src={img}
                             title=""
                         />
                     </div>
