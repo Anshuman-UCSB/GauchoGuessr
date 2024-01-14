@@ -22,7 +22,7 @@ class Api:
 		print("loaded leaderboards")
 
 		self.images = {}
-		for cat in ("all",):
+		for cat in ("all_jpeg",):
 			self.images[cat]=[v.to_dict() for v in self.db.collection("images").document("categories").collection(cat).stream()]
 		print("loaded images")
 
@@ -105,7 +105,7 @@ if __name__=="__main__":
 	# a.storeImage("https://imgur.com/xdPyAmu",34.4122311, -119.8574505, "store")
 	# a.storeImage("https://imgur.com/UDY4o3P",34.4107781, -119.8569044,  "street")
 	# a.incrementUsers()
-	print(a.getImages(2))
+	# print(a.getImages(2))
 	raw="""
 34.4101267, -119.8544833 ,		https://imgur.com/wK19FIx
 34.4097920, -119.8540924 ,		https://imgur.com/eZm8cdn
@@ -144,7 +144,8 @@ if __name__=="__main__":
 34.4128692,	-119.8499447 ,	https://imgur.com/IQvZv3O
 34.4111114,	-119.8538319 ,	https://imgur.com/LX3Kqyn
 	"""
-	# for l in raw.strip().splitlines():
-	# 	lat,lon,link = map(lambda x: x.strip(), l.split(','))
-	# 	print(lat, lon, link)
-	# 	a.storeImage(link,float(lat), float(lon), "all")
+	for l in raw.strip().splitlines():
+		lat,lon,link = map(lambda x: x.strip(), l.split(','))
+		link+='.jpeg'
+		print(lat, lon, link)
+		a.storeImage(link,float(lat), float(lon), "all_jpeg")
