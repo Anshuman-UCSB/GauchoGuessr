@@ -86,6 +86,6 @@ if __name__ == "__main__":
        "main:app",
        host="0.0.0.0",
        reload=True,
-       ssl_keyfile="./cert.key",
-       ssl_certfile="./cert.crt",
+       ssl_certfile="ssl/fullchain.pem",
+       ssl_keyfile="ssl/privkey.pem",
        )

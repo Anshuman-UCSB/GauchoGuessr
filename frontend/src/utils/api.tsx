@@ -23,6 +23,7 @@ export const getLink = async (gameId: string | null,stage: number) => {
 		const response = await apiService.get(`/game/${gameId}?stage=${stage}`);
 		return response.data.link;
 	} catch (error) {
+		console.log("error in getLink!");
 		throw error;
 	}
 }
