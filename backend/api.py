@@ -63,6 +63,7 @@ class Api:
 
 	def getPotentialPosition(self, score):
 		def translate(pos):
+			pos+=1
 			if pos == 1:
 				return "1st!"
 			if pos == 2:

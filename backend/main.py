@@ -1,5 +1,6 @@
 from typing import Union
 from fastapi import FastAPI, Response
+import time
 from fastapi.middleware.cors import CORSMiddleware
 from api import Api
 from game import Game
@@ -89,11 +90,19 @@ def guess(gameid: str, time:int, lat:float, lon:float, stage:int, res: Response)
     return {"scores":game.stageScores, "times":game.stageTimes}
 
 @app.post("/game/{gameid}/submit", status_code=200, response_class=PrettyJSONResponse)
-def guess(gameid: str, name:str, res: Response):
+def submitScore(gameid: str, name:str, res: Response):
     game = games[gameid]
     old = name
     print("censoring",name)
     name = pf.censor(name)
+    toDel=[]
+    for k,g in games.items():
+        if time.time() > g.timestamp + 1200:
+            toDel.append(k)
+    for d in toDel:
+        print("deleting game",d)
+        del games[d]
+    print(games)
     if old != name:
         print("Censored",old,"to",name)
     return api.setScore("default", name, game.score)
