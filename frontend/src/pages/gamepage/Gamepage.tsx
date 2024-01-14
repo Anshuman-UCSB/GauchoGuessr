@@ -11,6 +11,7 @@ import "./Gamepage.scss";
 import Pano from "../../components/Pano";
 import MyMap from "../../components/Map";
 import Menu from "../../components/menu/Menu";
+import GameOver from "../../components/game-over/GameOver";
 
 type GamepageProps = {
     handleState: () => void;
@@ -19,6 +20,7 @@ type GamepageProps = {
 const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [isGameOverVisible, setIsGameOverVisible] = useState(false);
 
     useEffect(() => {
         function handleResize() {
@@ -37,10 +39,16 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
     const toggleMenu = () => {
         setIsMenuVisible(!isMenuVisible);
     };
+    const showGameOver = () => {
+        setIsGameOverVisible(true);
+    };
     return (
         <div className="gamepage-wrapper">
             {isMenuVisible && (
                 <Menu handleState={handleState} toggleMenu={toggleMenu} />
+            )}
+            {isGameOverVisible && (
+                <GameOver score={51728} time="7:37" handleState={handleState} />
             )}
             <div className="logo">
                 <img src={Left} alt="" />
@@ -128,7 +136,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Progress index={5} position="end"></Progress>
             </div>
             <div className="submit-wrapper">
-                <button>
+                <button onClick={showGameOver}>
                     <StrokeText
                         text="SUBMIT"
                         fontFamily="'Inter', sans-serif"

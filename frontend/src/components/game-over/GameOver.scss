@@ -1,0 +1,151 @@
+.game-over {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    z-index: 1;
+    position: absolute;
+    .game-over-box {
+        padding: 30px 130px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 20px;
+        border: 8px solid #000;
+        background: linear-gradient(
+                180deg,
+                #00467d 0%,
+                #002846 25%,
+                #001c31 54%,
+                #002e51 100%
+            ),
+            linear-gradient(180deg, #febc11 0%, #febc11 53.5%, #ffdf8c 100%),
+            #fff;
+        box-shadow: -4px 4px 0px 0px #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        .stats {
+            position: absolute;
+            top: -5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h1 {
+                position: absolute;
+                color: #fff;
+                font-family: Inter;
+                font-size: 60px;
+                font-style: italic;
+                font-weight: 900;
+                line-height: 60px;
+                margin: 10px;
+            }
+            .sub-stats {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                position: absolute;
+                top: 50px;
+                h2 {
+                    color: #fff;
+                    font-family: Inter;
+                    font-size: 30px;
+                    font-style: italic;
+                    font-weight: 900;
+                    line-height: normal;
+                }
+            }
+        }
+        .actions {
+            margin-top: 130px;
+
+            label {
+                color: #fff;
+                font-family: Inter;
+                font-size: 20px;
+                font-style: italic;
+                font-weight: 900;
+                line-height: normal;
+            }
+            input {
+                border-radius: 10px;
+                border: 5px solid #000;
+                background: #fff;
+                box-shadow: -4px 4px 0px 0px #000;
+                width: 100%;
+                height: 60px;
+                margin-top: 5px;
+                padding: 10px;
+                box-sizing: border-box;
+                font-family: Inter;
+                font-size: 20px;
+                font-style: italic;
+                font-weight: 900;
+                line-height: normal;
+            }
+            .wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 30px;
+                button {
+                    border-radius: 50px;
+                    border: 5px solid #000;
+                    background: linear-gradient(
+                        180deg,
+                        #ffb800 0%,
+                        #ffdf8c 100%
+                    );
+                    box-shadow: -4px 4px 0px 0px #000;
+                    padding: 5px 10px;
+                    margin-top: 7px;
+                }
+            }
+            .another-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                .share {
+                    border-radius: 50px;
+                    border: 5px solid #000;
+                    background: linear-gradient(
+                        180deg,
+                        #ffb800 0%,
+                        #ffdf8c 100%
+                    );
+                    box-shadow: -4px 4px 0px 0px #000;
+                    padding: 15px 70px;
+                }
+                .home {
+                    border-radius: 50px;
+                    border: 5px solid #000;
+                    background: linear-gradient(
+                        180deg,
+                        #ff3a3a 0%,
+                        #ff7474 100%
+                    );
+                    box-shadow: -4px 4px 0px 0px #000;
+                    padding: 15px 70px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 817px) {
+    .game-over {
+        .game-over-box {
+            padding: 30px 70px;
+            .stats {
+                width: 300px;
+                img {
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
