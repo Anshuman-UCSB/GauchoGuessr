@@ -66,7 +66,6 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         }
         if (gameCount % 2 === 0) {
             submitGuess(time, curLat, curLng, gameId, gameCount);
-            console.log("submitted!");
         } else {
         }
         setGameCount(gameCount + 1);
