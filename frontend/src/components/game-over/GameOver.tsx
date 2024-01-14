@@ -64,7 +64,7 @@ const GameOver: React.FC<GameOverProps> = ({
 
     const handleShareClick = () => {
         // Here you would handle the share functionality
-        const shareText = `I just scored ${score} on GauchoGuessr.com!`;
+        const shareText = `${username} just scored ${score} on GauchoGuessr.com!`;
 
         // Copy the text to the clipboard
         navigator.clipboard
