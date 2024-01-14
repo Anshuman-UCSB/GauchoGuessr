@@ -6,7 +6,7 @@ type timerProps = {
 }
 
 const CountdownTimer: React.FC<timerProps> = ({handleTime, reset}) => {
-  const [seconds, setSeconds] = useState(0); // 5 minutes in seconds
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     if (reset) {
@@ -19,7 +19,7 @@ const CountdownTimer: React.FC<timerProps> = ({handleTime, reset}) => {
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
     }
-  }, [reset]); // Empty dependency array ensures that useEffect runs only once on mount
+  }, [reset, handleTime]); // Empty dependency array ensures that useEffect runs only once on mount
 
   const formatTime = (time:any) => {
     const minutes = Math.floor(time / 60);

@@ -42,40 +42,57 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
         null,
     ]);
     const [stageTimes, setStageTimes] = useState([
-        null,
-        null,
-        null,
-        null,
-        null,
+        999,
+        999,
+        999,
+        999,
+        999,
     ]);
     const [realCoords, setRealCoords] = useState(tmpRealCoords);
-
     const [reset, setReset] = useState(false);
-
     const handleLat = (lat: number) => {
         setCurLat(lat);
     };
     const handleLng = (lng: number) => {
         setCurLng(lng);
     };
+    const updateTimeElement = (index:any, newValue:any) => {
+        setStageTimes((prevArray) => {
+          const newArray = [...prevArray]; // Create a copy of the original array
+          newArray[index] = newValue; // Update the specific element
+          return newArray; // Set the state with the new array
+        });
+    };
     const handleTime = (time: number) => {
         setTime(time);
         return time;
     };
-
+    const formatTime = (time:any) => {
+        const minutes = Math.floor(time / 60);
+        const remainingSeconds = time % 60;
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+      };
+    
     const progressGame = () => {
         if (gameCount >= 9) {
             setIsGameOverVisible(true);
+            //console.log("time1: " + times[0] + " time2: " + times[1] + " time3: " + times[2] + " time4: " + times[3] + " time5: " + times[4]);
+            //console.log("time1: " + formatTime(stageTimes[0]) + " time2: " + formatTime(stageTimes[1]) + " time3: " + formatTime(stageTimes[2]) + " time4: " + formatTime(stageTimes[3]) + " time5: " + formatTime(stageTimes[4]))
+            //console.log("score1: " + stageScores[0] + " score2: " + stageScores[1] + " score3: " + stageScores[2] + " score4: " + stageScores[3] + " score5: " + stageScores[4]);
         }
         if (gameCount % 2 === 0) {
+            //console.log("time before reset: " + time);
+
             const guess = async ()=>{
                 const result = await submitGuess(time, curLat, curLng, gameId, gameCount);
                 setStageScores(result.scores);
                 setStageTimes(result.times);
             }
             guess();
+            //updateTimeElement(Math.floor(gameCount/2), time);
+            console.log("time before reset: " + time);
             setReset(true);
-        } else {
+        } else if (gameCount < 8) {
             setReset(false);
         }
         setGameCount(gameCount + 1);
@@ -132,7 +149,7 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                                     (v: number | null): v is number =>
                                         v !== null
                                 )
-                                .reduce((acc: number, cv: any) => acc + cv, 0)} time="7:37" handleState={handleState} />
+                                .reduce((acc: number, cv: any) => acc + cv, 0)} time={formatTime(stageTimes[0] + stageTimes[1] + stageTimes[2] + stageTimes[3] + stageTimes[4])} handleState={handleState} />
             )}
             <div className="logo">
                 <img src={Left} alt="" />
@@ -236,28 +253,28 @@ const Gamepage: React.FC<GamepageProps> = ({ handleState }) => {
                 <Progress
                     index={1}
                     score={stageScores[0]}
-                    time={stageTimes[0]}
+                    time={formatTime(stageTimes[0])}
                     position="start"
                 ></Progress>
                 <Progress
                     index={2}
                     score={stageScores[1]}
-                    time={stageTimes[1]}
+                    time={formatTime(stageTimes[1])}
                 ></Progress>
                 <Progress
                     index={3}
                     score={stageScores[2]}
-                    time={stageTimes[2]}
+                    time={formatTime(stageTimes[2])}
                 ></Progress>
                 <Progress
                     index={4}
                     score={stageScores[3]}
-                    time={stageTimes[3]}
+                    time={formatTime(stageTimes[3])}
                 ></Progress>
                 <Progress
                     index={5}
                     score={stageScores[4]}
-                    time={stageTimes[4]}
+                    time={formatTime(stageTimes[4])}
                     position="end"
                 ></Progress>
             </div>
